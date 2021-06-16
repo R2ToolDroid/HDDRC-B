@@ -12,7 +12,7 @@ SoftwareSerial MainInput(14, 15); // Pin D14 ist RX, Pin D15 ist TX.
 Servo HoloV; ///PWM_OUT PIN 10
 Servo LegMot; //PWM OUT PIN 7
 Servo ArmSrv; //PWM OUT PIN 16
-Servo DomeMot; // PWM OUT PIN 5
+Servo DomeMot; // PWM OUT PIN 4
 
 #include "vars.h"
 
@@ -22,7 +22,7 @@ int ir1, ir2, ir3, ir4;
 float temp = 24;
 
 #include "Mdriver.h"
-#include "autodome.h"
+//#include "autodome.h"
 #include "command.h"
 
 
@@ -71,11 +71,11 @@ void setup(){
         delay(3000);
     }
 
-  DomeMot.write(90);   //PIN 5
+  DomeMot.write(90);   //PIN 4
   HoloV.write(90);
   LegMot.write(90);    //PIN 7
   DomeMot.write(90);
-  ArmSrv.write(90);
+  ArmSrv.write(ARM_IN);
 
   
 }
@@ -87,7 +87,7 @@ void loop() {
     CeckSens();
     
   if (Mode == 0){
-      autoDome();
+      //autoDome();
      //durchlauf = durchlauf+1;
   }
 
