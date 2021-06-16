@@ -22,6 +22,22 @@ void ProzessComando() {
       //LMotor(M_STOP);
       tPos = B_CENT;
     }
+
+
+    if(data == "O"){
+      //LMotor(M_STOP);
+      //tPos = B_CENT;
+     Serial.println("Arm out");
+     ArmSrv.write(ARM_OUT);
+    }
+    
+    if(data == "I"){
+      //LMotor(M_STOP);
+      //tPos = B_CENT;
+     Serial.println("ARM_IN");
+     ArmSrv.write(ARM_IN);
+    }
+
     
 
     if (data == "hi-r2" )

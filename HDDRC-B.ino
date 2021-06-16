@@ -22,6 +22,7 @@ int ir1, ir2, ir3, ir4;
 float temp = 24;
 
 #include "Mdriver.h"
+#include "autodome.h"
 #include "command.h"
 
 
@@ -32,7 +33,7 @@ void setup(){
   DomeMot.attach(DMOT_L); 
   ArmSrv.attach(STATUS_PIN);
    
-  Serial.begin(9600);
+  Serial.begin(115200);
   MainInput.begin(9600);
    // set the digital pin as output:
   pinMode(ledPin1, OUTPUT);
@@ -69,25 +70,30 @@ void setup(){
         //while (1);
         delay(3000);
     }
-   
-   
+
+  DomeMot.write(90);   //PIN 5
+  HoloV.write(90);
+  LegMot.write(90);    //PIN 7
+  DomeMot.write(90);
+  ArmSrv.write(90);
+
+  
 }
 
 
 void loop() {
 
     Comand();  
-    SendPing();
-   
+    CeckSens();
     
   if (Mode == 0){
-     randomMove();
-     durchlauf = durchlauf+1;
+      autoDome();
+     //durchlauf = durchlauf+1;
   }
 
   if (Mode == 1  ){
       rcMove();
-      BodyRot(tPos);
+     // BodyRot(tPos);
   }
 
   if (Mode == 2  ){
@@ -95,27 +101,17 @@ void loop() {
   }
 
   if (Mode == 3  ){
-      BodyRot(tPos);
-      if (debug){
-     Serial.print(analogRead(LEG_POTI));
+    BodyRot(tPos);
+      if (debug){ 
+        Serial.println(analogRead(LEG_POTI));
     }
   }
 
   if (durchlauf == 10 ) {
-    center("L");
+  //  center("L");
     } 
     
-  //Serial.println(durchlauf);
   
-   stat = digitalRead(STATUS_PIN);
-    //Serial.print(stat);
-    if (stat == 0) {
-      Mode++;
-      digitalWrite(ledPinC, HIGH);  
-      delay(1000);
-      digitalWrite(ledPinC, LOW);  
-      }
-     if (Mode >= 4){Mode=0;}
      
   
      

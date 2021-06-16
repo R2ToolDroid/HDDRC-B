@@ -1,9 +1,10 @@
 #include <Arduino.h>                           
 
 String data; //Consohlen Input
-String VERSION = "2-04-21-HDDRC";
+String VERSION = "16-06-21-HDDRC";
+String output;
 
-byte debug = false;
+byte debug = true;
 long randNumber;
 long zeit;
 unsigned long previousMillis = 0;        // will store last time LED was updated
@@ -28,7 +29,7 @@ int Sdiff = 0;
 
 ///PIN ARRANGEMENT
 
-#define DOME_PULSE_IN 21 //RC Signal DomeRotation
+//#define DOME_PULSE_IN 21 //RC Signal DomeRotation
 //#define BODY_PULSE_IN 16 //RC Signal Body Move
 
 #define DMOT_L 5  //PWM SYREN DOME
@@ -63,10 +64,19 @@ int tPos = B_CENT;   // Target Position Body Roll
 
 
 //int tempo = 200;
-//int Htempo = 170; //Human Tracking Tempo
+int Htempo_R = 100; //Human Tracking Tempo
+int Htempo_L = 80; //Human Tracking Tempo
+
+int Ltemp_R = 60;   //Leg Speed
+int Ltemp_L = 120 ; //Leg Motor Speed
+
 //int Rtempo = 200; // Autorotation Tempo
 //int tempo = 200; // kalkuliertes Tempo
 
+
+/// GRIP ARM Positions
+#define ARM_IN  40
+#define ARM_OUT 150
 
 
 
@@ -80,7 +90,7 @@ unsigned long zeit1, zeit2;
 //int sensorRC = 21; ///von 2 auf 21 geänder wg I2C  Dome Rotation
 
 //int sensorRC_out = 10;
-int Mode = 2;// 0=RandMove // 1=RCMove  //2=human //3=Service
+int Mode = 3;// 0=RandMove // 1=RCMove  //2=human //3=Service
 int moving = 0;
 
 //#### Status Signal fom 16  ACTUAL INACTIVE
