@@ -9,14 +9,15 @@ void resetM(){
    digitalWrite(ledPin2, LOW); 
    ledState1 = LOW;
    ledState2 = LOW;
-   analogWrite(DMOT_L, 0);  
-   analogWrite(DMOT_R, 0);  
+   DomeMot.write(90);
+   //analogWrite(DMOT_L, 0);  
+   //analogWrite(DMOT_R, 0);  
 
    
 }
 
 void LMotor(int MO){   
-    tempo = 200;    
+    //tempo = 200;    
     
     switch (MO){
       case M_LEFT:
@@ -24,8 +25,9 @@ void LMotor(int MO){
       Serial.print(" left ");   
       } 
       digitalWrite(ledPin2, HIGH); 
-      analogWrite(BMOT_R, 0); 
-      analogWrite(BMOT_L, tempo); 
+      LegMot.write(120);
+      //analogWrite(BMOT_R, 0); 
+      //analogWrite(BMOT_L, tempo); 
       break;
 
       case M_RIGHT:
@@ -33,8 +35,9 @@ void LMotor(int MO){
       Serial.print(" right ");
       }
       digitalWrite(ledPin1, HIGH); 
-      analogWrite(BMOT_L, 0); 
-      analogWrite(BMOT_R, tempo);
+      LegMot.write(60);
+      //analogWrite(BMOT_L, 0); 
+      //analogWrite(BMOT_R, tempo);
       break; 
 
       case M_STOP:
@@ -43,16 +46,17 @@ void LMotor(int MO){
       }
       digitalWrite(ledPin2, LOW); 
       digitalWrite(ledPin1, LOW); 
-      analogWrite(BMOT_L, 0); 
-      analogWrite(BMOT_R, 0);
+      LegMot.write(90);
+      //analogWrite(BMOT_L, 0); 
+      //analogWrite(BMOT_R, 0);
       break;
 
       default:
       ///do nothing
       digitalWrite(ledPin2, LOW); 
       digitalWrite(ledPin1, LOW); 
-      analogWrite(BMOT_L, 0); 
-      analogWrite(BMOT_R, 0);
+      //analogWrite(BMOT_L, 0); 
+      //analogWrite(BMOT_R, 0);
       break;
       
     }
@@ -130,8 +134,6 @@ void BodyRot(int tPos) {   // Rotiert zu tPos
 }
 
 
-
-
 int center(String dir) {
     /// Fuert den Dome in die Ausgangsposition //
    centerState = digitalRead(SENSOR_CENTER);  
@@ -139,20 +141,23 @@ int center(String dir) {
     Serial.print(F("CenterMode "));
     Serial.println(centerState);
    }
-    analogWrite(DMOT_R, 0); 
-    analogWrite(DMOT_L, 0); 
+    //analogWrite(DMOT_R, 0); 
+    //analogWrite(DMOT_L, 0); 
+    DomeMot.write(90);
       
       while ( centerState == 0){
 
                  centerState = digitalRead(SENSOR_CENTER);  
                 
                 if (dir == "L" ) {
-                  analogWrite(DMOT_L, Rtempo); 
+                  //analogWrite(DMOT_L, Rtempo); 
+                  DomeMot.write(DOME_PWM_L);
                   digitalWrite(ledPin2, HIGH);                  
                 } 
                 
                 if (dir == "R") {
-                  analogWrite(DMOT_R, Rtempo); 
+                  //analogWrite(DMOT_R, Rtempo); 
+                  DomeMot.write(DOME_PWM_R);
                   digitalWrite(ledPin1, HIGH); 
                 }
                 
@@ -162,9 +167,9 @@ int center(String dir) {
       }
    digitalWrite(ledPin1, LOW); 
    digitalWrite(ledPin2, LOW); 
-   analogWrite(DMOT_L, 0);  
-   analogWrite(DMOT_R, 0);  
-   
+   //analogWrite(DMOT_L, 0);  
+   //analogWrite(DMOT_R, 0);  
+   DomeMot.write(90);
    delay(200);
    durchlauf = 0;
    
@@ -191,25 +196,29 @@ void FindRoTime(){
 void rotateR( int Rpos) {
   
      digitalWrite(ledPin1, HIGH); 
-     analogWrite(DMOT_L, 0); 
-     analogWrite(DMOT_R, Rtempo);
+     DomeMot.write(DOME_PWM_R);
+     //analogWrite(DMOT_L, 0); 
+     //analogWrite(DMOT_R, Rtempo);
      delay (Rpos);
      digitalWrite(ledPin1, LOW); 
-     analogWrite(DMOT_L, 0); 
-     analogWrite(DMOT_R, 0);
+     DomeMot.write(90);
+     //analogWrite(DMOT_L, 0); 
+     //analogWrite(DMOT_R, 0);
           
 }
 
 void rotateL( int Rpos) {
 
      digitalWrite(ledPin2, HIGH); 
-     analogWrite(DMOT_R, 0); 
-     analogWrite(DMOT_L, Rtempo);
+     //analogWrite(DMOT_R, 0); 
+     //analogWrite(DMOT_L, Rtempo);
+     DomeMot.write(DOME_PWM_L);
+     
      delay (Rpos);
      digitalWrite(ledPin2, LOW); 
-     analogWrite(DMOT_L, 0); 
-     analogWrite(DMOT_R, 0);
-    
+     //analogWrite(DMOT_L, 0); 
+     //analogWrite(DMOT_R, 0);
+     DomeMot.write(90);
   
 }
 
@@ -224,13 +233,14 @@ int rcMove() {
     if (sensorValue < 1350){
       
      
-      int tempoR = map (sensorValue, 1460, 530,50,254);
+      int tempoR = map (sensorValue, 1460, 530,90,180);
      
       if (tempoR >= 180) {tempoR=255;}
          
      digitalWrite(ledPin2, HIGH); 
-     analogWrite(DMOT_L, 0); 
-     analogWrite(DMOT_R, tempoR); 
+     DomeMot.write(tempoR);
+     //analogWrite(DMOT_L, 0); 
+     //analogWrite(DMOT_R, tempoR); 
 
      if (debug){ 
         Serial.println(F("Rechts"));
@@ -243,21 +253,22 @@ int rcMove() {
      // set the LED with the ledState of the variable:
       digitalWrite(ledPin1, HIGH); 
       //tempo = sensorValue ;////6;
-      int tempoL = map(sensorValue, 1450,2400,50,254);
+      int tempoL = map(sensorValue, 1450,2400,90,0);
       //tempo = tempo /5;
-      
-      analogWrite(DMOT_R, 0);  
-      analogWrite(DMOT_L, tempoL); 
+      DomeMot.write(tempoL);
+      //analogWrite(DMOT_R, 0);  
+      //analogWrite(DMOT_L, tempoL); 
       if (debug) {
       Serial.println(F("Links"));
       Serial.print(F("tempoL "));Serial.println(tempoL);
       }   
      
     }  else {
-      analogWrite(DMOT_L, 0);  
+      //analogWrite(DMOT_L, 0);  
       digitalWrite(ledPin1, LOW); 
-      analogWrite(DMOT_R, 0); 
-      digitalWrite(ledPin2, LOW);     
+      //analogWrite(DMOT_R, 0); 
+      digitalWrite(ledPin2, LOW); 
+      DomeMot.write(90);    
       //delay (zeit);    
     }
 
@@ -271,7 +282,7 @@ int rcMove() {
 }
 
 void randomMove() {
- 
+ /*
    // print a random number from 0 to 299
   zeit = random(3000, 6000)+(temp-20)*faktor;
   
@@ -330,7 +341,7 @@ void randomMove() {
       Serial.print(F("Faktor "));
       Serial.println(temp*faktor);
   }
- 
+ */
 }
 
 void SendPing(){
@@ -356,6 +367,8 @@ void SendPing(){
 
 
 void human(){
+
+  /*
      if (movementSensor.dataReady()) {
         ir1 = movementSensor.getRawIR1();
         ir2 = movementSensor.getRawIR2();
@@ -442,7 +455,7 @@ void human(){
         }
 
       /*****Vertikal system Holo ***/
-       
+       /*
         vpos1 = map(ir3, -1300, 800, 180, 90); ///verstellung nach oben
         vpos2 = map(ir1, -1300, 800, 0, 90);   /// Verstellung nach unten
 
@@ -493,5 +506,5 @@ void human(){
         }
     }
     
-  
+  */
 }

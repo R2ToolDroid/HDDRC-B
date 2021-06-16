@@ -10,6 +10,14 @@ unsigned long previousMillis = 0;        // will store last time LED was updated
 // constants won't change:
 const long interval = 6000;           // interval at which to blink (milliseconds)
 
+////DOME SERVO POWER
+#define DOME_PWM_R 130
+#define DOME_PWM_L 50
+///  0   - 90  - 180
+/// 50   - 90  - 130   //40
+/// 70   - 90  - 110   //20
+
+
 //Move Sensor
 byte NachL = false;
 byte NachR = false;
@@ -23,11 +31,13 @@ int Sdiff = 0;
 #define DOME_PULSE_IN 21 //RC Signal DomeRotation
 //#define BODY_PULSE_IN 16 //RC Signal Body Move
 
-#define DMOT_L 5  //L298 MotorIN1
-#define DMOT_R 6  //L298 MotorIN2
+#define DMOT_L 5  //PWM SYREN DOME
 
-#define BMOT_L 7  //L298 MotorIN3
-#define BMOT_R 4  //L298 MotorIN4
+//#define DMOT_R 6  //L298 MotorIN2
+
+#define BMOT_L 7  //PWM LEG MOT POLOLU
+
+//#define BMOT_R 4  //L298 MotorIN4
 
 #define STATUS_PIN 16  // Body Sensor or Input Ping
 #define PWM_OUT 10 // PWM Holo V Movement
@@ -53,9 +63,9 @@ int tPos = B_CENT;   // Target Position Body Roll
 
 
 //int tempo = 200;
-int Htempo = 170; //Human Tracking Tempo
-int Rtempo = 200; // Autorotation Tempo
-int tempo = 200; // kalkuliertes Tempo
+//int Htempo = 170; //Human Tracking Tempo
+//int Rtempo = 200; // Autorotation Tempo
+//int tempo = 200; // kalkuliertes Tempo
 
 
 

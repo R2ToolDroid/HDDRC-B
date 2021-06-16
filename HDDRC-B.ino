@@ -9,7 +9,10 @@
 #include "Grove_Human_Presence_Sensor.h" // der SoftwareSerial Bibliothek nutzen.
 SoftwareSerial MainInput(14, 15); // Pin D14 ist RX, Pin D15 ist TX.
                                    // Die Funktion softSerial() kann nun wie Serial() genutzt werden.     
-Servo HoloV; 
+Servo HoloV; ///PWM_OUT PIN 10
+Servo LegMot; //PWM OUT PIN 7
+Servo ArmSrv; //PWM OUT PIN 16
+Servo DomeMot; // PWM OUT PIN 5
 
 #include "vars.h"
 
@@ -25,7 +28,9 @@ float temp = 24;
 void setup(){
 
   HoloV.attach(PWM_OUT);
-
+  LegMot.attach(BMOT_L);
+  DomeMot.attach(DMOT_L); 
+  ArmSrv.attach(STATUS_PIN);
    
   Serial.begin(9600);
   MainInput.begin(9600);
@@ -34,14 +39,14 @@ void setup(){
   pinMode(ledPin2, OUTPUT);
   pinMode(ledPinC, OUTPUT);
 
-  pinMode(DMOT_L, OUTPUT);
-  pinMode(DMOT_R, OUTPUT); 
+  //pinMode(DMOT_L, OUTPUT);
+  //pinMode(DMOT_R, OUTPUT); 
 
   //pinMode(STATUS_PIN, INPUT_PULLUP); 
   pinMode(SENSOR_CENTER,  INPUT_PULLUP);
  
-  digitalWrite(DMOT_L, 0);  
-  digitalWrite(DMOT_R, 0); 
+  //digitalWrite(DMOT_L, 0);  
+  //digitalWrite(DMOT_R, 0); 
 
    
   // if analog input pin 0 is unconnected, random analog
