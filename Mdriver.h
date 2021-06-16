@@ -20,7 +20,7 @@ void resetM(){
    ledState2 = LOW;
    DomeMot.write(90);   //PIN 5
    HoloV.write(90);
-   LegMot.write(90);    //PIN 7
+   //LegMot.write(90);    //PIN 7
    DomeMot.write(90);
    ArmSrv.write(ARM_IN); 
 

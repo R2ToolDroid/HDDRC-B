@@ -32,6 +32,7 @@ void setup(){
   LegMot.attach(BMOT_L);
   DomeMot.attach(DMOT_L); 
   ArmSrv.attach(STATUS_PIN);
+   ArmSrv.write(ARM_IN);
    
   Serial.begin(115200);
   MainInput.begin(9600);
@@ -73,9 +74,9 @@ void setup(){
 
   DomeMot.write(90);   //PIN 4
   HoloV.write(90);
-  LegMot.write(90);    //PIN 7
+  //LegMot.write(90);    //PIN 7
   DomeMot.write(90);
-  ArmSrv.write(ARM_IN);
+  //ArmSrv.write(ARM_IN);
 
   
 }
@@ -84,7 +85,9 @@ void setup(){
 void loop() {
 
     Comand();  
-    CeckSens();
+    //CeckSens();
+
+     
     
   if (Mode == 0){
       //autoDome();
@@ -93,7 +96,7 @@ void loop() {
 
   if (Mode == 1  ){
       rcMove();
-     // BodyRot(tPos);
+    
   }
 
   if (Mode == 2  ){
@@ -101,12 +104,14 @@ void loop() {
   }
 
   if (Mode == 3  ){
-    BodyRot(tPos);
+    rcMove();
       if (debug){ 
         Serial.println(analogRead(LEG_POTI));
     }
   }
-
+  
+  BodyRot(tPos);
+  
   if (durchlauf == 10 ) {
   //  center("L");
     } 
