@@ -20,9 +20,9 @@ void resetM(){
    ledState2 = LOW;
    DomeMot.write(90);   //PIN 5
    HoloV.write(90);
-   LegMot.write(90);    //PIN 7
+   //LegMot.write(90);    //PIN 7
    DomeMot.write(90);
-   ArmSrv.write(0); 
+   ArmSrv.write(ARM_IN); 
 
 }
 
@@ -215,11 +215,12 @@ int rcMove() {
       //   Serial.print(F("Sensor IN "));Serial.println(sensorValue);
       } 
     //return;
+    int tempo = map (sensorValue, 530, 2000,0,180);
     
     if (sensorValue >=800){ ///Check if Sensor is Connectet an RC on
 
     
-    if (sensorValue < 1350){
+    if (sensorValue < 1450){
       
      
       int tempoR = map (sensorValue, 1460, 530,90,180);
@@ -237,7 +238,7 @@ int rcMove() {
       } 
     
     
-    } else if (sensorValue > 1650) {
+    } else if (sensorValue > 1550) {
           
      // set the LED with the ledState of the variable:
       digitalWrite(ledPin1, HIGH); 
@@ -264,8 +265,8 @@ int rcMove() {
     }///End Sensor Check
     
   if (debug) { 
-    //Serial.print(F("Tempo "));Serial.println(tempo);
-    //Serial.print(F("Value "));Serial.println(sensorValue);
+    Serial.print(F("Tempo "));Serial.print(tempo);
+    Serial.print(F("   Value "));Serial.println(sensorValue);
     }
   
 }
@@ -355,19 +356,23 @@ void human(){
         if (diff){
 
            if (ir4 > ir2){ ////turn right
-               // Serial.println("Dreh nach Rechts");
-                digitalWrite(ledPin2, HIGH);  //Dreh nach R
+            if (debug){
+               Serial.println("Dreh nach Links");
+            }
+            digitalWrite(ledPin2, HIGH);  //Dreh nach R
                 //analogWrite(DMOT_L,Htempo); 
-                DomeMot.write(Htempo_R);
+                DomeMot.write(Htempo_L);
                 //servoDispatch.moveTo(0,50,0,500);
                 
            }    
            
             if (ir2 > ir4){ ////turn left
-                //Serial.println("Dreh nach DMOT_L");
+              if (debug){
+                Serial.println("Dreh nach Rechts");
+              }
                 digitalWrite(ledPin1, HIGH);  //Dreh nach L
                 //analogWrite(DMOT_R,Htempo);
-                DomeMot.write(Htempo_L); 
+                DomeMot.write(Htempo_R); 
                 //servoDispatch.moveTo(0,50,0,1200);
                 
            } 

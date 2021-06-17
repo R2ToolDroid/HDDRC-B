@@ -4,7 +4,7 @@ String data; //Consohlen Input
 String VERSION = "16-06-21-HDDRC";
 String output;
 
-byte debug = true;
+byte debug = false;
 long randNumber;
 long zeit;
 unsigned long previousMillis = 0;        // will store last time LED was updated
@@ -12,8 +12,8 @@ unsigned long previousMillis = 0;        // will store last time LED was updated
 const long interval = 6000;           // interval at which to blink (milliseconds)
 
 ////DOME SERVO POWER
-#define DOME_PWM_R 130
-#define DOME_PWM_L 50
+#define DOME_PWM_R 100
+#define DOME_PWM_L 80
 ///  0   - 90  - 180
 /// 50   - 90  - 130   //40
 /// 70   - 90  - 110   //20
@@ -32,7 +32,7 @@ int Sdiff = 0;
 //#define DOME_PULSE_IN 21 //RC Signal DomeRotation
 //#define BODY_PULSE_IN 16 //RC Signal Body Move
 
-#define DMOT_L 5  //PWM SYREN DOME
+#define DMOT_L 4  //PWM SYREN DOME
 
 //#define DMOT_R 6  //L298 MotorIN2
 
@@ -64,14 +64,14 @@ int tPos = B_CENT;   // Target Position Body Roll
 
 
 //int tempo = 200;
-int Htempo_R = 100; //Human Tracking Tempo
-int Htempo_L = 80; //Human Tracking Tempo
+int Htempo_R = 110; //Human Tracking Tempo
+int Htempo_L = 70; //Human Tracking Tempo
 
 int Ltemp_R = 60;   //Leg Speed
 int Ltemp_L = 120 ; //Leg Motor Speed
 
-//int Rtempo = 200; // Autorotation Tempo
-//int tempo = 200; // kalkuliertes Tempo
+int Rtempo = 60; // Autorotation Tempo
+int Ltempo = 120; // kalkuliertes Tempo
 
 
 /// GRIP ARM Positions
@@ -90,7 +90,7 @@ unsigned long zeit1, zeit2;
 //int sensorRC = 21; ///von 2 auf 21 geänder wg I2C  Dome Rotation
 
 //int sensorRC_out = 10;
-int Mode = 3;// 0=RandMove // 1=RCMove  //2=human //3=Service
+int Mode = 2;// 0=RandMove // 1=RCMove  //2=human //3=Service
 int moving = 0;
 
 //#### Status Signal fom 16  ACTUAL INACTIVE

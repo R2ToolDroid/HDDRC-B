@@ -28,6 +28,7 @@ void ProzessComando() {
       //LMotor(M_STOP);
       //tPos = B_CENT;
      Serial.println("Arm out");
+     
      ArmSrv.write(ARM_OUT);
     }
     
