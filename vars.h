@@ -11,12 +11,7 @@ unsigned long previousMillis = 0;        // will store last time LED was updated
 // constants won't change:
 const long interval = 6000;           // interval at which to blink (milliseconds)
 
-////DOME SERVO POWER
-#define DOME_PWM_R 100
-#define DOME_PWM_L 80
-///  0   - 90  - 180
-/// 50   - 90  - 130   //40
-/// 70   - 90  - 110   //20
+
 
 
 //Move Sensor
@@ -63,16 +58,21 @@ bool legPause = true;
 int MO = 0;
 int tPos = B_CENT;   // Target Position Body Roll
 
-
+////DOME SERVO POWER
+#define DOME_PWM_R 100
+#define DOME_PWM_L 80
+///  0   - 90  - 180
+/// 50   - 90  - 130   //40
+/// 70   - 90  - 110   //20
 //int tempo = 200;
-int Htempo_R = 110; //Human Tracking Tempo
-int Htempo_L = 70; //Human Tracking Tempo
+int Htempo_R = 105; //Human Tracking Tempo
+int Htempo_L = 75; //Human Tracking Tempo
 
 int Ltemp_R = 60;   //Leg Speed
 int Ltemp_L = 120 ; //Leg Motor Speed
 
-int Rtempo = 60; // Autorotation Tempo
-int Ltempo = 120; // kalkuliertes Tempo
+int Rtempo = 100; // Autorotation Tempo
+int Ltempo = 80; // kalkuliertes Tempo
 
 
 /// GRIP ARM Positions
