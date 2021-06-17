@@ -22,17 +22,17 @@ int ir1, ir2, ir3, ir4;
 float temp = 24;
 
 #include "Mdriver.h"
-//#include "autodome.h"
+#include "autodome.h"
 #include "command.h"
 
 
 void setup(){
 
-  HoloV.attach(PWM_OUT);
-  LegMot.attach(BMOT_L);
-  DomeMot.attach(DMOT_L); 
+  HoloV.attach(PWM_OUT);  // PIN 10
+  LegMot.attach(BMOT_L);  // PIN 7
+  DomeMot.attach(DMOT_L); // PIN 4
   ArmSrv.attach(STATUS_PIN);
-   ArmSrv.write(ARM_IN);
+  ArmSrv.write(ARM_IN);
    
   Serial.begin(115200);
   MainInput.begin(9600);
@@ -77,7 +77,7 @@ void setup(){
   //LegMot.write(90);    //PIN 7
   DomeMot.write(90);
   //ArmSrv.write(ARM_IN);
-
+  //ServoTouch(false);
   
 }
 
@@ -90,8 +90,9 @@ void loop() {
      
     
   if (Mode == 0){
-      //autoDome();
+     autoDome();
      //durchlauf = durchlauf+1;
+     
   }
 
   if (Mode == 1  ){
@@ -101,16 +102,17 @@ void loop() {
 
   if (Mode == 2  ){
      human(); 
+     legPause == true;
   }
 
   if (Mode == 3  ){
-    rcMove();
+    BodyRot(tPos);
       if (debug){ 
         Serial.println(analogRead(LEG_POTI));
     }
   }
   
-  BodyRot(tPos);
+  //BodyRot(tPos);
   
   if (durchlauf == 10 ) {
   //  center("L");

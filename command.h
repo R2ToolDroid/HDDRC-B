@@ -3,10 +3,9 @@
 //// Commandos ///////
 void ProzessComando() {
 
-    
-        
+       
       
-      Serial.print("Data :");
+      Serial.print("Data =");
       Serial.println(data);
 
     if(data == "T"){
@@ -161,16 +160,9 @@ void Comand() {
 ///Comando Pruefung////
    if(Serial.available() > 0)
     {
-        data = Serial.readStringUntil('\n');
-       
-       /**
-       Serial.println("Received command: " + data);
-        if(data.startsWith("height")) {
-        Serial.println(data.substring(7));
-        **/
-    //  }
         
-        ProzessComando();
+        data = Serial.readStringUntil('\n');         
+        ProzessComando();       
     }
   ////Prüfung 2///
   MainInput.listen();
@@ -178,8 +170,9 @@ void Comand() {
    if (MainInput.available() > 0)
     {
         data = MainInput.readStringUntil('\r');
-        Serial.println(MainInput);
+        Serial.println("main");
         Serial.println(data);
         ProzessComando();
+        
     }
 }

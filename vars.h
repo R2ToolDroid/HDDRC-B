@@ -59,6 +59,7 @@ int Sdiff = 0;
 #define B_CENT 500 //Boby Center
 #define D_ZONE 20 // Death Zone
 bool mov = true;
+bool legPause = true;
 int MO = 0;
 int tPos = B_CENT;   // Target Position Body Roll
 

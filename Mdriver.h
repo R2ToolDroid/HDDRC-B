@@ -4,6 +4,22 @@ bool inRange(int val, int minimum, int maximum){
   return ((minimum <= val)&&(val <= maximum));
 }
 
+
+void ServoTouch(bool T){
+
+    if (T == true){
+      ///attach servos
+      LegMot.attach(BMOT_L);  // PIN 7
+      ArmSrv.attach(STATUS_PIN);
+    } else {
+      LegMot.detach();  // PIN 7
+      ArmSrv.detach();
+    }
+
+
+  
+}
+
 void CeckSens(){
 
     if (SENSOR_RC_IN == 0){
@@ -18,7 +34,6 @@ void resetM(){
    digitalWrite(ledPin2, LOW); 
    ledState1 = LOW;
    ledState2 = LOW;
-   DomeMot.write(90);   //PIN 5
    HoloV.write(90);
    //LegMot.write(90);    //PIN 7
    DomeMot.write(90);
@@ -72,11 +87,14 @@ void LMotor(int MO){
     }
   
 }
-
-
-void BodyRot(int tPos) {   // Rotiert zu tPos
+/*
+void BodyRot2(int tPos) {   // Rotiert zu tPos
 
     int potPos = analogRead(LEG_POTI);
+
+
+  if (mov = true){
+    
 
    if (inRange(tPos, potPos-D_ZONE, potPos+D_ZONE)){
     if (debug) {   
@@ -84,11 +102,12 @@ void BodyRot(int tPos) {   // Rotiert zu tPos
     }
       potPos = tPos;
       MO = M_STOP; 
-      mov = false;
+      mov = false;   
       
    
    }    else {
-    mov = true;              
+    mov = true;    
+              
    }
 
     if ( potPos >= B_TOP ) {mov = false;}
@@ -102,7 +121,7 @@ void BodyRot(int tPos) {   // Rotiert zu tPos
       MO = M_RIGHT;
    }
 
-   
+   } /// end if MOV = true
    
     LMotor(MO);
     if (debug) {   
@@ -113,6 +132,72 @@ void BodyRot(int tPos) {   // Rotiert zu tPos
     Serial.println(tPos);
     }
 
+  
+}
+**/
+
+
+void BodyRot(int tPos) {   // Rotiert zu tPos
+
+    int potPos = analogRead(LEG_POTI);
+
+    
+
+    if (inRange(tPos, potPos-D_ZONE, potPos+D_ZONE)){
+    if (debug) {   
+      Serial.print(" match "); // Alles klar so bleiben
+    }
+      potPos = tPos;
+      
+      if (debug) {   
+      Serial.print(" stop ");
+      }
+      digitalWrite(ledPin2, LOW); 
+      digitalWrite(ledPin1, LOW); 
+      LegMot.write(90);
+      
+      mov = false;
+      
+      
+   
+   }    else {
+    mov = true;    
+    
+   }
+
+    //if ( potPos >= B_TOP ) {mov = false;}
+    //if ( potPos <= B_DOWN) {mov = false;}
+
+   if ( (potPos >= tPos) && (mov == true) ){
+      if (debug) {   
+      Serial.print(" left ");   
+      } 
+      digitalWrite(ledPin2, HIGH); 
+      LegMot.write(Ltemp_L);
+   }
+
+    if ((potPos <= tPos) && (mov == true)) {
+      if (debug) {   
+      Serial.print(" right ");
+      }
+      digitalWrite(ledPin1, HIGH); 
+      LegMot.write(Ltemp_R);
+   }
+
+    
+   
+    //LMotor(MO);
+    if (debug) {   
+    Serial.print(" Poti Pos = ");
+    //Serial.print();  
+    Serial.print(potPos);
+    Serial.print("| mov = ");
+    Serial.print(mov);
+    Serial.print(" | Tpos = ");
+    Serial.println(tPos);
+    }
+    
+   
     
 }
 
