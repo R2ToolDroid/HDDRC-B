@@ -126,7 +126,7 @@ void autoDome() {
           
               domeSpeed = domeAutoSpeed * domeTurnDirection;
 
-              int DomePulseSpeed = map(domeSpeed,-100,100,0,180);
+              int DomePulseSpeed = map(domeSpeed,-100,100,70,110);
           
               //SyR->motor(domeSpeed);
              DomeMot.write(DomePulseSpeed);
