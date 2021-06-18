@@ -4,7 +4,7 @@ String data; //Consohlen Input
 String VERSION = "16-06-21-HDDRC";
 String output;
 
-byte debug = false co;
+byte debug = false;
 long randNumber;
 long zeit;
 unsigned long previousMillis = 0;        // will store last time LED was updated
