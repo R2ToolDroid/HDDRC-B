@@ -4,6 +4,8 @@ String data; //Consohlen Input
 String VERSION = "16-06-21-HDDRC";
 String output;
 
+#define DEBUG
+
 byte debug = false;
 long randNumber;
 long zeit;
@@ -49,12 +51,12 @@ int Sdiff = 0;
 
 //Body Positionen
 
-#define B_TOP  700 //Body Hoch
-#define B_DOWN  300 //Body Down
+#define B_TOP  300 //Body Hoch
+#define B_DOWN  700 //Body Down
 #define B_CENT 500 //Boby Center
 #define D_ZONE 20 // Death Zone
 bool mov = true;
-bool legPause = true;
+
 int MO = 0;
 int tPos = B_CENT;   // Target Position Body Roll
 
@@ -91,7 +93,7 @@ unsigned long zeit1, zeit2;
 //int sensorRC = 21; ///von 2 auf 21 geänder wg I2C  Dome Rotation
 
 //int sensorRC_out = 10;
-int Mode = 2;// 0=RandMove // 1=RCMove  //2=human //3=Service
+int Mode = 0;// 0=RandMove // 1=RCMove  //2=human //3=Service
 int moving = 0;
 
 //#### Status Signal fom 16  ACTUAL INACTIVE

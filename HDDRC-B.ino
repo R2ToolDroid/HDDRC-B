@@ -102,11 +102,12 @@ void loop() {
 
   if (Mode == 2  ){
      human(); 
-     legPause == true;
+    
   }
 
   if (Mode == 3  ){
     BodyRot(tPos);
+    rcMove();
       if (debug){ 
         Serial.println(analogRead(LEG_POTI));
     }
@@ -115,7 +116,7 @@ void loop() {
   //BodyRot(tPos);
   
   if (durchlauf == 10 ) {
-  //  center("L");
+      center("L");
     } 
     
   

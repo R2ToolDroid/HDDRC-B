@@ -4,22 +4,6 @@ bool inRange(int val, int minimum, int maximum){
   return ((minimum <= val)&&(val <= maximum));
 }
 
-
-void ServoTouch(bool T){
-
-    if (T == true){
-      ///attach servos
-      LegMot.attach(BMOT_L);  // PIN 7
-      ArmSrv.attach(STATUS_PIN);
-    } else {
-      LegMot.detach();  // PIN 7
-      ArmSrv.detach();
-    }
-
-
-  
-}
-
 void CeckSens(){
 
     if (SENSOR_RC_IN == 0){
@@ -28,7 +12,7 @@ void CeckSens(){
     }
   
 }
-
+/*
 void resetM(){
    digitalWrite(ledPin1, LOW); 
    digitalWrite(ledPin2, LOW); 
@@ -40,7 +24,7 @@ void resetM(){
    ArmSrv.write(ARM_IN); 
 
 }
-
+*/
 void LMotor(int MO){   
     //tempo = 200;    
     
@@ -308,7 +292,7 @@ int rcMove() {
     if (sensorValue < 1450){
       
      
-      int tempoR = map (sensorValue, 1460, 530,90,180);
+      int tempoR = map (sensorValue, 1460, 530,90,160);
      
       if (tempoR >= 180) {tempoR=255;}
          
@@ -328,7 +312,7 @@ int rcMove() {
      // set the LED with the ledState of the variable:
       digitalWrite(ledPin1, HIGH); 
       //tempo = sensorValue ;////6;
-      int tempoL = map(sensorValue, 1450,2400,90,0);
+      int tempoL = map(sensorValue, 1450,2400,70,0);
       //tempo = tempo /5;
       DomeMot.write(tempoL);
       //analogWrite(DMOT_R, 0);  
@@ -414,8 +398,8 @@ void human(){
         //Serial.print(ir3);
         Serial.print(F("], 4:LH["));
         Serial.print(ir4);
-        //Serial.print(F("], temp["));
-        //Serial.print(temp);
+        Serial.print(F("], temp["));
+        Serial.print(temp);
         Serial.print(F("], diff["));
         Serial.print(Sdiff);    
         Serial.print(F("]"));
@@ -441,23 +425,30 @@ void human(){
         if (diff){
 
            if (ir4 > ir2){ ////turn right
+                int Lpulse = map(ir4,-255,1600,70,90);
+            
             if (debug){
-               Serial.println("Dreh nach Links");
+               Serial.print("Dreh nach Links");
+               Serial.println(Lpulse);
             }
             digitalWrite(ledPin2, HIGH);  //Dreh nach R
                 //analogWrite(DMOT_L,Htempo); 
-                DomeMot.write(Htempo_L);
+                //DomeMot.write(Htempo_L);
+                DomeMot.write(Lpulse);
                 //servoDispatch.moveTo(0,50,0,500);
                 
            }    
            
             if (ir2 > ir4){ ////turn left
+              int Rpulse = map(ir2,-255,1600,110,90);
               if (debug){
-                Serial.println("Dreh nach Rechts");
+                Serial.print("Dreh nach Rechts");
+                Serial.println(Rpulse);
               }
                 digitalWrite(ledPin1, HIGH);  //Dreh nach L
                 //analogWrite(DMOT_R,Htempo);
-                DomeMot.write(Htempo_R); 
+                //DomeMot.write(Htempo_R); 
+                DomeMot.write(Rpulse); 
                 //servoDispatch.moveTo(0,50,0,1200);
                 
            } 

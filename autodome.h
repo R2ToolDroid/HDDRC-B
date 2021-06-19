@@ -143,8 +143,12 @@ void autoDome() {
               //SyR->stop();
               DomeMot.write(90);
               
+              durchlauf++;
+              
               #ifdef DEBUG
                output += "STOP TURN!!\r\n";
+               output += "Durchlauf";
+               output += durchlauf;
               #endif
         }
       
