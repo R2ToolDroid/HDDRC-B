@@ -374,7 +374,7 @@ void human(){
         movementSensor.startNextSample();
         Sdiff = ir2 - ir4 ; ///Differenz
 
-        int gap = 200;  /// Lücke wo nichts verfolgt wird
+        
 
         int range = ir2+ir4;  /// Abstand
 
@@ -392,26 +392,26 @@ void human(){
         {  
         //Serial.print(F("1:BOT["));
         //Serial.print(ir1);
-        Serial.print(F(" 2:RH["));
-        Serial.print(ir2);
+        //Serial.print(F(" 2:RH["));
+        //Serial.print(ir2);
         //Serial.print(F("], 3:TOP["));
         //Serial.print(ir3);
-        Serial.print(F("], 4:LH["));
-        Serial.print(ir4);
-        Serial.print(F("], temp["));
-        Serial.print(temp);
-        Serial.print(F("], diff["));
-        Serial.print(Sdiff);    
-        Serial.print(F("]"));
+        //Serial.print(F("], 4:LH["));
+        //Serial.print(ir4);
+        //Serial.print(F("], temp["));
+        //Serial.print(temp);
+        //Serial.print(F("], diff["));
+        //Serial.print(Sdiff);    
+        //Serial.print(F("]"));
         //Serial.print(F("], millis["));
         //Serial.print(millis());
         //Serial.print(F("]"));
 
-        Serial.print("----range[");
-        Serial.print(range);
-        Serial.print("]----gap");
-        Serial.print(gap);
-        Serial.println();
+        //Serial.print("----range[");
+        //Serial.print(range);
+        //Serial.print("]----gap");
+        //Serial.print(gap);
+        //Serial.println();
         }        
         ///////////////////////////////////////
         //Bewegungs Kalkulation
@@ -424,14 +424,14 @@ void human(){
 
         if (diff){
 
-           if (ir4 > ir2){ ////turn right
-                int Lpulse = map(ir4,-255,1600,70,90);
+           if (ir4 > ir2){ ////turn left
+                int Lpulse = map(ir4,-255,1600,75,90);
             
             if (debug){
                Serial.print("Dreh nach Links");
                Serial.println(Lpulse);
             }
-            digitalWrite(ledPin2, HIGH);  //Dreh nach R
+            digitalWrite(ledPin2, HIGH);  //Dreh nach L
                 //analogWrite(DMOT_L,Htempo); 
                 //DomeMot.write(Htempo_L);
                 DomeMot.write(Lpulse);
@@ -439,13 +439,13 @@ void human(){
                 
            }    
            
-            if (ir2 > ir4){ ////turn left
-              int Rpulse = map(ir2,-255,1600,110,90);
+            if (ir2 > ir4){ ////turn right
+              int Rpulse = map(ir2,-255,1600,125,90);
               if (debug){
                 Serial.print("Dreh nach Rechts");
                 Serial.println(Rpulse);
               }
-                digitalWrite(ledPin1, HIGH);  //Dreh nach L
+                digitalWrite(ledPin1, HIGH);  //Dreh nach R
                 //analogWrite(DMOT_R,Htempo);
                 //DomeMot.write(Htempo_R); 
                 DomeMot.write(Rpulse); 
@@ -495,23 +495,23 @@ void human(){
         HoloV.write(tempPos); 
         delay(50);
         if (debug){
-        Serial.print ("action ");
-        Serial.print (Hdiff);
+        //Serial.print ("action ");
+        //Serial.print (Hdiff);
         
-        Serial.print ("Temp Pos ");
-        Serial.print (tempPos);
+        //Serial.print ("Temp Pos ");
+        //Serial.print (tempPos);
        // Serial.print ("  S 3  ");
         //Serial.print (vpos1);
-        Serial.print (" raw O ");
-        Serial.print (ir3);
+        //Serial.print (" raw O ");
+        //Serial.print (ir3);
          
-        //7Serial.print ("  S 3 unten ");
+        //Serial.print ("  S 3 unten ");
         //Serial.print(ir3);
         //Serial.print (vpos2);
-        Serial.print (" raw U ");
-        Serial.print(ir1);
-        Serial.print("   Vdiff: ");
-        Serial.println(Vdiff);
+        //Serial.print (" raw U ");
+        //Serial.print(ir1);
+        //Serial.print("   Vdiff: ");
+        //Serial.println(Vdiff);
         }
     }
     

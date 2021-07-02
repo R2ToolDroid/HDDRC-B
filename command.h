@@ -7,6 +7,17 @@ void ProzessComando() {
       
       Serial.print("Data =");
       Serial.println(data);
+    if(data == "GH"){      
+      gap = 300;
+    }
+
+    if(data == "GM"){      
+      gap = 250;
+    }
+    
+    if(data == "GL"){
+      gap = 200;
+    }  
 
     if(data == "T"){
       //BodyRot(B_TOP);

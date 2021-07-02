@@ -24,6 +24,8 @@ byte Ping = false;
 
 int Sdiff = 0;
 
+int gap = 200;  /// 200 LOW 300 HIGH Lücke wo nichts verfolgt wird
+
 ///PIN ARRANGEMENT
 
 //#define DOME_PULSE_IN 21 //RC Signal DomeRotation
