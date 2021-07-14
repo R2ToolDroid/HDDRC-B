@@ -458,7 +458,7 @@ void human(){
           digitalWrite(ledPin2, LOW);  //Dreh nach L
           digitalWrite(ledPin1, LOW);  //Dreh nach R
           DomeMot.write(90);
-          //Serial.println("--Mitte--");
+          Serial.println("--Mitte--");
          // tempPos = 90;
           
         }
