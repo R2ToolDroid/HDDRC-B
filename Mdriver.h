@@ -292,9 +292,9 @@ int rcMove() {
     if (sensorValue < 1450){
       
      
-      int tempoR = map (sensorValue, 1460, 530,90,160);
+      int tempoR = map (sensorValue, 1460, 1100,90,180);
      
-      if (tempoR >= 180) {tempoR=255;}
+     // if (tempoR >= 180) {tempoR=255;}
          
      digitalWrite(ledPin2, HIGH); 
      DomeMot.write(tempoR);
@@ -302,7 +302,7 @@ int rcMove() {
      //analogWrite(DMOT_R, tempoR); 
 
      if (debug){ 
-        Serial.println(F("Rechts"));
+        //Serial.println(F("Rechts"));
          Serial.print(F("tempoR "));Serial.println(tempoR);
       } 
     
@@ -318,7 +318,7 @@ int rcMove() {
       //analogWrite(DMOT_R, 0);  
       //analogWrite(DMOT_L, tempoL); 
       if (debug) {
-      Serial.println(F("Links"));
+      //Serial.println(F("Links"));
       Serial.print(F("tempoL "));Serial.println(tempoL);
       }   
      
@@ -334,7 +334,7 @@ int rcMove() {
     }///End Sensor Check
     
   if (debug) { 
-    Serial.print(F("Tempo "));Serial.print(tempo);
+    //Serial.print(F("Tempo "));Serial.print(tempo);
     Serial.print(F("   Value "));Serial.println(sensorValue);
     }
   
@@ -425,7 +425,8 @@ void human(){
         if (diff){
 
            if (ir4 > ir2){ ////turn left
-                int Lpulse = map(ir4,-255,1600,75,90);
+                int Lpulse = map(ir4,-255,1600,70,90);
+                //int Lpulse = 70;
             
             if (debug){
                Serial.print("Dreh nach Links");
@@ -440,7 +441,9 @@ void human(){
            }    
            
             if (ir2 > ir4){ ////turn right
-              int Rpulse = map(ir2,-255,1600,125,90);
+              int Rpulse = map(ir2,-255,1600,140,90);
+              //int Rpulse = 120;
+              
               if (debug){
                 Serial.print("Dreh nach Rechts");
                 Serial.println(Rpulse);
@@ -458,7 +461,7 @@ void human(){
           digitalWrite(ledPin2, LOW);  //Dreh nach L
           digitalWrite(ledPin1, LOW);  //Dreh nach R
           DomeMot.write(90);
-          Serial.println("--Mitte--");
+          //Serial.println("--Mitte--");
          // tempPos = 90;
           
         }
