@@ -72,13 +72,13 @@ void setup(){
         delay(3000);
     }
 
-  DomeMot.write(90);   //PIN 4
+  //DomeMot.write(90);   //PIN 4
   HoloV.write(90);
   //LegMot.write(90);    //PIN 7
   DomeMot.write(90);
   //ArmSrv.write(ARM_IN);
   //ServoTouch(false);
-  
+  center("L");
 }
 
 

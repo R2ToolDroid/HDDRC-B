@@ -63,7 +63,7 @@ int MO = 0;
 int tPos = B_CENT;   // Target Position Body Roll
 
 ////DOME SERVO POWER
-#define DOME_PWM_R 100
+#define DOME_PWM_R 110
 #define DOME_PWM_L 80
 ///  0   - 90  - 180
 /// 50   - 90  - 130   //40
@@ -86,7 +86,7 @@ int Ltempo = 80; // kalkuliertes Tempo
 
 
 int faktor = 100;
-unsigned long Rpos = 35;  //Zeit von Center to Zielposition in Millisec
+unsigned long Rpos = 13;  //Zeit von Center to Zielposition in Millisec
 int durchlauf = 0;
 int sensorValue = 1500; ///Umschalt Pulse
 

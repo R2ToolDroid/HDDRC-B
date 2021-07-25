@@ -245,17 +245,25 @@ void FindRoTime(){
 }
 
 
-void rotateR( int Rpos) {
+void rotateR( int Rposi) {
   
      digitalWrite(ledPin1, HIGH); 
      DomeMot.write(DOME_PWM_R);
      //analogWrite(DMOT_L, 0); 
      //analogWrite(DMOT_R, Rtempo);
-     delay (Rpos);
+     delay (Rposi);
      digitalWrite(ledPin1, LOW); 
      DomeMot.write(90);
      //analogWrite(DMOT_L, 0); 
      //analogWrite(DMOT_R, 0);
+
+     if (debug){
+      Serial.print("PWM ");
+      Serial.print(DOME_PWM_R);
+      Serial.print(" Time ");
+      Serial.println(Rposi);
+     }
+     
           
 }
 
@@ -292,7 +300,7 @@ int rcMove() {
     if (sensorValue < 1450){
       
      
-      int tempoR = map (sensorValue, 1460, 1100,90,180);
+      int tempoR = map (sensorValue, 1460, 1100,90,130);
      
      // if (tempoR >= 180) {tempoR=255;}
          
@@ -312,7 +320,7 @@ int rcMove() {
      // set the LED with the ledState of the variable:
       digitalWrite(ledPin1, HIGH); 
       //tempo = sensorValue ;////6;
-      int tempoL = map(sensorValue, 1450,2400,70,0);
+      int tempoL = map(sensorValue, 1450,2000,0,40);
       //tempo = tempo /5;
       DomeMot.write(tempoL);
       //analogWrite(DMOT_R, 0);  
@@ -334,7 +342,7 @@ int rcMove() {
     }///End Sensor Check
     
   if (debug) { 
-    //Serial.print(F("Tempo "));Serial.print(tempo);
+    Serial.print(F("Tempo "));Serial.print(tempo);
     Serial.print(F("   Value "));Serial.println(sensorValue);
     }
   

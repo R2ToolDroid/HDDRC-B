@@ -125,6 +125,7 @@ void ProzessComando() {
 
     if (data == "mode1"){
       Serial.println(F("Mode 1 RC"));
+      //center("L");
       delay(1000);
       Mode = 1;
       }
@@ -172,9 +173,9 @@ void ProzessComando() {
 
     if (data =="dance") { 
       
-      rotateL(80);
+      rotateL(70);
       delay(1000);
-      rotateR(80);
+      rotateR(110);
       
       }
 
