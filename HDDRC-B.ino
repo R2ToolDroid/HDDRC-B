@@ -78,7 +78,7 @@ void setup(){
   DomeMot.write(90);
   //ArmSrv.write(ARM_IN);
   //ServoTouch(false);
-  center("L");
+  //center("L");
 }
 
 
