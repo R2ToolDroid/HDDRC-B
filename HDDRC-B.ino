@@ -107,6 +107,7 @@ void loop() {
 
   if (Mode == 3  ){
     BodyRot(tPos);
+    autoDome();
     rcMove();
       if (debug){ 
         Serial.println(analogRead(LEG_POTI));

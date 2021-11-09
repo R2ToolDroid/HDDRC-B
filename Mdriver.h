@@ -203,13 +203,13 @@ int center(String dir) {
                 
                 if (dir == "L" ) {
                   //analogWrite(DMOT_L, Rtempo); 
-                  DomeMot.write(DOME_PWM_L);
+                  DomeMot.write(70);
                   digitalWrite(ledPin2, HIGH);                  
                 } 
                 
                 if (dir == "R") {
                   //analogWrite(DMOT_R, Rtempo); 
-                  DomeMot.write(DOME_PWM_R);
+                  DomeMot.write(120);
                   digitalWrite(ledPin1, HIGH); 
                 }
                 

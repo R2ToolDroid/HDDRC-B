@@ -6,7 +6,7 @@ String output;
 
 #define DEBUG
 
-byte debug = true;
+byte debug = false;
 long randNumber;
 long zeit;
 unsigned long previousMillis = 0;        // will store last time LED was updated

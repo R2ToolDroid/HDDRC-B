@@ -132,8 +132,9 @@ void autoDome() {
              DomeMot.write(DomePulseSpeed);
               
              #ifdef DEBUG
-               output += "Turning Now!!\r\n";
-                
+               output += "Turning Now!!";
+               output += DomePulseSpeed;
+               output += "\r\n";
              #endif
           
           
