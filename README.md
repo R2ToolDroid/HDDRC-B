@@ -1,6 +1,8 @@
 # HDDRC-B
 Dome Control With Body Ankle
 
+### USED actual on ToolDroid
+
 Based on https://github.com/R2ToolDroid/Dome-Controller_Human-01
 
 ## MAG TAG PINOUT
