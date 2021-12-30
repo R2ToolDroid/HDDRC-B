@@ -4,7 +4,7 @@ String data; //Consohlen Input
 String VERSION = "16-06-21-HDDRC";
 String output;
 
-#define DEBUG
+//#define DEBUG
 
 byte debug = false;
 long randNumber;
@@ -21,6 +21,8 @@ byte NachL = false;
 byte NachR = false;
 byte Mitte = false;
 byte Ping = false;
+
+byte dir = false;  //false = left  true == right 
 
 int Sdiff = 0;
 

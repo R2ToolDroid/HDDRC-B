@@ -126,22 +126,22 @@ void ProzessComando() {
     if (data == "mode1"){
       Serial.println(F("Mode 1 RC"));
       //center("L");
-      delay(1000);
+      //delay(1000);
       Mode = 1;
       }
     if (data == "mode0"){
       Serial.println(F("Mode 0 Random"));
-      delay(1000);
+      //delay(1000);
       Mode = 0;
       }
     if (data == "mode3"){
       Serial.println(F("Mode 3 Service"));
-      delay(1000);
+      //delay(1000);
       Mode = 3;
       }
     if (data == "mode2"){
       Serial.println(F("Mode 2 Human"));
-      delay(1000);
+      //delay(1000);
       Mode = 2;
       }  
      
@@ -179,7 +179,22 @@ void ProzessComando() {
       
       }
 
-    if (data =="center") {center("L");}
+    if (data =="center") {
+
+
+        if (dir == true)
+        {
+          center("L");
+          dir = false;
+
+          
+        } else {
+          center("R");
+          dir = true;
+        }
+      
+      
+      }
     data = "";
 }
 

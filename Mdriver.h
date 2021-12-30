@@ -8,7 +8,7 @@ void CeckSens(){
 
     if (SENSOR_RC_IN == 0){
        Serial.println("No PWM Signal on 21");
-       delay(3000);
+       //delay(3000);
     }
   
 }
@@ -191,7 +191,9 @@ int center(String dir) {
    centerState = digitalRead(SENSOR_CENTER);  
    if (debug) {   
     Serial.print(F("CenterMode "));
-    Serial.println(centerState);
+    Serial.print(centerState);
+    Serial.print(F("Dir "));
+    Serial.println(dir);
    }
     //analogWrite(DMOT_R, 0); 
     //analogWrite(DMOT_L, 0); 
@@ -203,13 +205,15 @@ int center(String dir) {
                 
                 if (dir == "L" ) {
                   //analogWrite(DMOT_L, Rtempo); 
-                  DomeMot.write(70);
+                  //DomeMot.write(70);
+                  DomeMot.write(40);
                   digitalWrite(ledPin2, HIGH);                  
                 } 
                 
                 if (dir == "R") {
                   //analogWrite(DMOT_R, Rtempo); 
-                  DomeMot.write(120);
+                  //DomeMot.write(120);
+                  DomeMot.write(140);
                   digitalWrite(ledPin1, HIGH); 
                 }
                 
