@@ -304,7 +304,7 @@ int rcMove() {
     if (sensorValue < 1450){
       
      
-      int tempoR = map (sensorValue, 1460, 1100,90,130);
+      int tempoR = map (sensorValue, 1460, 1200,90,0);
      
      // if (tempoR >= 180) {tempoR=255;}
          
@@ -314,7 +314,7 @@ int rcMove() {
      //analogWrite(DMOT_R, tempoR); 
 
      if (debug){ 
-        //Serial.println(F("Rechts"));
+        Serial.print(F("Rechts"));
          Serial.print(F("tempoR "));Serial.println(tempoR);
       } 
     
@@ -324,13 +324,13 @@ int rcMove() {
      // set the LED with the ledState of the variable:
       digitalWrite(ledPin1, HIGH); 
       //tempo = sensorValue ;////6;
-      int tempoL = map(sensorValue, 1450,2000,0,40);
+      int tempoL = map(sensorValue, 1450,1900,90,160);
       //tempo = tempo /5;
       DomeMot.write(tempoL);
       //analogWrite(DMOT_R, 0);  
       //analogWrite(DMOT_L, tempoL); 
       if (debug) {
-      //Serial.println(F("Links"));
+      Serial.print(F("Links"));
       Serial.print(F("tempoL "));Serial.println(tempoL);
       }   
      
