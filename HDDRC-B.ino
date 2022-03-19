@@ -1,20 +1,42 @@
 ///Automatische Domebewegung Steuerung
 ///Doc Snyder Tool Droid DomeController
 ///für Arduino pro mini
+/*
+PIN MAPPING
 
+  PIN 2  SDA
+  PIN 3  SCL
+  PIN 4  Dome Mot PWM
+  PIN 5   TXsmc
+  PIN 6   RXsmc
+  PIN 7  frei  vorher LegMOt
+  PIN 8  SENSOR_CENTER
+  PIN 9  LEG_POTI
+  PIN 10 PWM_OUT HOLO
+  PIN 14 Rx  Main
+  PIN 15 Tx  Main
+  PIN 16 STATUS_PIN
+  PIN 18 ledPin1
+  PIN 19 ledPin2
+  PIN 20 ledPinC
+  PIN 21 SENSOR_RC_IN
+
+ */
 #include <SoftwareSerial.h>        // Durch diesen Include können wir die Funktionen 
 #include <Servo.h>
 
 #include <Wire.h>  
+#include "vars.h"
 #include "Grove_Human_Presence_Sensor.h" // der SoftwareSerial Bibliothek nutzen.
 SoftwareSerial MainInput(14, 15); // Pin D14 ist RX, Pin D15 ist TX.
+SoftwareSerial smcSerial = SoftwareSerial(rxPin, txPin);
+
                                    // Die Funktion softSerial() kann nun wie Serial() genutzt werden.     
 Servo HoloV; ///PWM_OUT PIN 10
-Servo LegMot; //PWM OUT PIN 7
 Servo ArmSrv; //PWM OUT PIN 16
 Servo DomeMot; // PWM OUT PIN 4
 
-#include "vars.h"
+
 
 AK9753 movementSensor;
 
@@ -28,9 +50,25 @@ float temp = 24;
 
 void setup(){
 
+   // Initialize software serial object with baud rate of 19.2 kbps.
+  smcSerial.begin(19200);
+ 
+  // The Simple Motor Controller must be running for at least 1 ms
+  // before we try to send serial data, so we delay here for 5 ms.
+  delay(5);
+ 
+  // If the Simple Motor Controller has automatic baud detection
+  // enabled, we first need to send it the byte 0xAA (170 in decimal)
+  // so that it can learn the baud rate.
+  smcSerial.write(0xAA);
+ 
+  // Next we need to send the Exit Safe Start command, which
+  // clears the safe-start violation and lets the motor run.
+  exitSafeStart();
+
   HoloV.attach(PWM_OUT);  // PIN 10
-  LegMot.attach(BMOT_L);  // PIN 7
   DomeMot.attach(DMOT_L); // PIN 4
+  
   ArmSrv.attach(STATUS_PIN);
   ArmSrv.write(ARM_IN);
    
@@ -72,9 +110,8 @@ void setup(){
         delay(3000);
     }
 
-  //DomeMot.write(90);   //PIN 4
+  
   HoloV.write(90);
-  //LegMot.write(90);    //PIN 7
   DomeMot.write(90);
   //ArmSrv.write(ARM_IN);
   //ServoTouch(false);
@@ -85,10 +122,7 @@ void setup(){
 void loop() {
 
     Comand();  
-    //CeckSens();
 
-     
-    
   if (Mode == 0){
      autoDome();
      //durchlauf = durchlauf+1;

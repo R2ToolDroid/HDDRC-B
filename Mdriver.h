@@ -4,121 +4,34 @@ bool inRange(int val, int minimum, int maximum){
   return ((minimum <= val)&&(val <= maximum));
 }
 
-void CeckSens(){
-
-    if (SENSOR_RC_IN == 0){
-       Serial.println("No PWM Signal on 21");
-       //delay(3000);
-    }
-  
+////SMC Controler Stuff /////
+// Based On following Skipt
+// required to allow motors to move
+// must be called when controller restarts and after any error
+void exitSafeStart()
+{
+  smcSerial.write(0x83);
 }
-/*
-void resetM(){
-   digitalWrite(ledPin1, LOW); 
-   digitalWrite(ledPin2, LOW); 
-   ledState1 = LOW;
-   ledState2 = LOW;
-   HoloV.write(90);
-   //LegMot.write(90);    //PIN 7
-   DomeMot.write(90);
-   ArmSrv.write(ARM_IN); 
-
+ 
+// speed should be a number from -3200 to 3200
+void setMotorSpeed(int speed)
+{
+  if (speed < 0)
+  {
+    smcSerial.write(0x86);  // motor reverse command
+    speed = -speed;  // make speed positive
+  }
+  else
+  {
+    smcSerial.write(0x85);  // motor forward command
+  }
+  smcSerial.write(speed & 0x1F);
+  smcSerial.write(speed >> 5 & 0x7F);
 }
-*/
-void LMotor(int MO){   
-    //tempo = 200;    
-    
-    switch (MO){
-      case M_LEFT:
-      if (debug) {   
-      Serial.print(" left ");   
-      } 
-      digitalWrite(ledPin2, HIGH); 
-      LegMot.write(Ltemp_L);
-      //analogWrite(BMOT_R, 0); 
-      //analogWrite(BMOT_L, tempo); 
-      break;
-
-      case M_RIGHT:
-      if (debug) {   
-      Serial.print(" right ");
-      }
-      digitalWrite(ledPin1, HIGH); 
-      LegMot.write(Ltemp_R);
-      //analogWrite(BMOT_L, 0); 
-      //analogWrite(BMOT_R, tempo);
-      break; 
-
-      case M_STOP:
-      if (debug) {   
-      Serial.print(" stop ");
-      }
-      digitalWrite(ledPin2, LOW); 
-      digitalWrite(ledPin1, LOW); 
-      LegMot.write(90);
-      //analogWrite(BMOT_L, 0); 
-      //analogWrite(BMOT_R, 0);
-      break;
-
-      default:
-      ///do nothing
-      digitalWrite(ledPin2, LOW); 
-      digitalWrite(ledPin1, LOW); 
-      //analogWrite(BMOT_L, 0); 
-      //analogWrite(BMOT_R, 0);
-      break;
-      
-    }
-  
-}
-/*
-void BodyRot2(int tPos) {   // Rotiert zu tPos
-
-    int potPos = analogRead(LEG_POTI);
 
 
-  if (mov = true){
-    
 
-   if (inRange(tPos, potPos-D_ZONE, potPos+D_ZONE)){
-    if (debug) {   
-      Serial.print(" match "); // Alles klar so bleiben
-    }
-      potPos = tPos;
-      MO = M_STOP; 
-      mov = false;   
-      
-   
-   }    else {
-    mov = true;    
-              
-   }
 
-    if ( potPos >= B_TOP ) {mov = false;}
-    if ( potPos <= B_DOWN) {mov = false;}
-
-   if ( (potPos >= tPos) && (mov == true) ){
-      MO = M_LEFT;
-   }
-
-    if ((potPos <= tPos) && (mov == true)) {
-      MO = M_RIGHT;
-   }
-
-   } /// end if MOV = true
-   
-    LMotor(MO);
-    if (debug) {   
-    Serial.print(" Poti Pos = ");
-    //Serial.print();  
-    Serial.print(potPos);
-    Serial.print(" | Tpos = ");
-    Serial.println(tPos);
-    }
-
-  
-}
-**/
 
 
 void BodyRot(int tPos) {   // Rotiert zu tPos
@@ -138,8 +51,7 @@ void BodyRot(int tPos) {   // Rotiert zu tPos
       }
       digitalWrite(ledPin2, LOW); 
       digitalWrite(ledPin1, LOW); 
-      LegMot.write(90);
-      
+      STOP
       mov = false;
       
       
@@ -157,7 +69,8 @@ void BodyRot(int tPos) {   // Rotiert zu tPos
       Serial.print(" left ");   
       } 
       digitalWrite(ledPin2, HIGH); 
-      LegMot.write(Ltemp_L);
+      //heute LegMot.write(Ltemp_L);  // Dreh Left
+      FORWARD
    }
 
     if ((potPos <= tPos) && (mov == true)) {
@@ -165,7 +78,8 @@ void BodyRot(int tPos) {   // Rotiert zu tPos
       Serial.print(" right ");
       }
       digitalWrite(ledPin1, HIGH); 
-      LegMot.write(Ltemp_R);
+      //heute LegMot.write(Ltemp_R);  // Dreh Right
+      REVERSE
    }
 
     
@@ -354,24 +268,7 @@ int rcMove() {
 
 
 
-void SendPing(){
-  
-    unsigned long currentMillis = millis();
 
-
-       if (currentMillis - previousMillis >= interval) {
-    // save the last time you blinked the LED
-    previousMillis = currentMillis;
-    if (Ping == true){
-    Serial.println("Ping");
-    Ping = false;
-    }
-
-    
-    }
-       
-    
-}
 
 
 void human(){

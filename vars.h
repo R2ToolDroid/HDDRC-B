@@ -35,12 +35,6 @@ int gap = 200;  /// 200 LOW 300 HIGH Lücke wo nichts verfolgt wird
 
 #define DMOT_L 4  //PWM SYREN DOME
 
-//#define DMOT_R 6  //L298 MotorIN2
-
-#define BMOT_L 7  //PWM LEG MOT POLOLU
-
-//#define BMOT_R 4  //L298 MotorIN4
-
 #define STATUS_PIN 16  // Body Sensor or Input Ping
 #define PWM_OUT 10 // PWM Holo V Movement
 
@@ -52,6 +46,13 @@ int gap = 200;  /// 200 LOW 300 HIGH Lücke wo nichts verfolgt wird
 #define M_LEFT 1
 #define M_RIGHT 2
 #define M_STOP 3
+
+#define FORWARD   setMotorSpeed(3200);
+#define REVERSE   setMotorSpeed(-3200);
+#define STOP      setMotorSpeed(0);
+ 
+#define txPin 5
+#define rxPin 6
 
 //Body Positionen
 
