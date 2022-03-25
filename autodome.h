@@ -7,7 +7,7 @@ unsigned long domeStopTurnTime = 0;    // millis() when next turn should stop
 unsigned long domeStartTurnTime = 0;  // millis() when next turn should start
 int domeStatus = 0;  // 0 = stopped, 1 = prepare to turn, 2 = turning
 int time360DomeTurn = 2500;  // milliseconds for dome to complete 360 turn at domeAutoSpeed - Valid Values: 2000 - 8000 (2000 = 2 seconds)
-byte domeAutoSpeed = 50;     // Speed used when dome automation is active - Valid Values: 50 - 100
+byte domeAutoSpeed = 150;     // Speed used when dome automation is active - Valid Values: 50 - 100
 
 byte isCenter = false;
 byte findCenter = true;
@@ -124,12 +124,17 @@ void autoDome() {
         if (domeStopTurnTime > millis())
         {
           
-              domeSpeed = domeAutoSpeed * domeTurnDirection;
+              //domeSpeed = domeAutoSpeed * domeTurnDirection;
 
-              int DomePulseSpeed = map(domeSpeed,-100,100,70,110);
+              //int DomePulseSpeed = map(domeSpeed,-100,100,50,255);
           
               //SyR->motor(domeSpeed);
-             DomeMot.write(DomePulseSpeed);
+             //DomeMot.write(DomePulseSpeed);
+             if (domeTurnDirection == -1){
+              DomeMot(RIGHT, domeAutoSpeed);
+             } else {
+             DomeMot(LEFT, domeAutoSpeed);
+             }
               
              #ifdef DEBUG
                output += "Turning Now!!";
@@ -142,7 +147,8 @@ void autoDome() {
         {
               domeStatus = 0;
               //SyR->stop();
-              DomeMot.write(90);
+              //DomeMot.write(90);
+              DomeMot(STOP,0);
               
               durchlauf++;
               
