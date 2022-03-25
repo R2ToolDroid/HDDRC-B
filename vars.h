@@ -74,8 +74,8 @@ int tPos = B_CENT;   // Target Position Body Roll
 int Htempo_R = 105; //Human Tracking Tempo
 int Htempo_L = 75; //Human Tracking Tempo
 
-int Ltemp_R = 60;   //Leg Speed
-int Ltemp_L = 120 ; //Leg Motor Speed
+int Ltemp_R = 50;   //Leg Speed
+int Ltemp_L = 140 ; //Leg Motor Speed
 
 int Rtempo = 100; // Autorotation Tempo
 int Ltempo = 80; // kalkuliertes Tempo
