@@ -7,7 +7,7 @@ unsigned long domeStopTurnTime = 0;    // millis() when next turn should stop
 unsigned long domeStartTurnTime = 0;  // millis() when next turn should start
 int domeStatus = 0;  // 0 = stopped, 1 = prepare to turn, 2 = turning
 int time360DomeTurn = 2500;  // milliseconds for dome to complete 360 turn at domeAutoSpeed - Valid Values: 2000 - 8000 (2000 = 2 seconds)
-byte domeAutoSpeed = 150;     // Speed used when dome automation is active - Valid Values: 50 - 100
+byte domeAutoSpeed = 220;     // Speed used when dome automation is active - Valid Values: 50 - 100
 
 byte isCenter = false;
 byte findCenter = true;

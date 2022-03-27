@@ -58,7 +58,8 @@ int gap = 200;  /// 200 LOW 300 HIGH Lücke wo nichts verfolgt wird
 
 //Body Positionen
 
-#define B_TOP  80 //Body Hoch
+#define B_TOP  300 //Body Hoch
+#define C_DRIVEPOS 80//
 #define B_DOWN  700 //Body Down
 #define B_CENT 500 //Boby Center
 #define D_ZONE 20 // Death Zone

@@ -28,6 +28,12 @@ void ProzessComando() {
       //LMotor(B_DOWN);
       tPos = B_DOWN;
     }
+
+    if(data == "DRIVE"){
+      //LMotor(B_DOWN);
+      tPos = C_DRIVEPOS;
+    }
+    
     if(data == "C"){
       //LMotor(M_STOP);
       tPos = B_CENT;

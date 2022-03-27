@@ -92,7 +92,7 @@ void BodyRot(int tPos) {   // Rotiert zu tPos
       digitalWrite(ledPin2, HIGH); 
       //heute LegMot.write(Ltemp_L);  // Dreh Left
       //FORWARD
-      LegMot(LEFT,255);
+      LegMot(LEFT,150);
    }
 
     if ((potPos <= tPos) && (mov == true)) {
@@ -102,7 +102,7 @@ void BodyRot(int tPos) {   // Rotiert zu tPos
       digitalWrite(ledPin1, HIGH); 
       //heute LegMot.write(Ltemp_R);  // Dreh Right
       //REVERSE
-      LegMot(RIGHT,255);
+      LegMot(RIGHT,150);
    }
 
     
@@ -249,7 +249,7 @@ int rcMove() {
     if (sensorValue < 1450){
       
      
-      int tempoR = map (sensorValue, 1460, 1200,100,255);
+      int tempoR = map (sensorValue, 1460, 1150,200,255);
      
      // if (tempoR >= 180) {tempoR=255;}
          
@@ -270,7 +270,7 @@ int rcMove() {
      // set the LED with the ledState of the variable:
       //digitalWrite(ledPin1, HIGH); 
       //tempo = sensorValue ;////6;
-      int tempoL = map(sensorValue, 1450,1900,100,255);
+      int tempoL = map(sensorValue, 1450,1850,200,255);
       //tempo = tempo /5;
       //DomeMot.write(tempoL);
       DomeMot(LEFT,tempoL);
