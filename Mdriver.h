@@ -31,6 +31,10 @@ void DomeMot( int Direction, int speed){
           /// LegMot(RIGHT,255);
 void LegMot( int Direction, int speed){
 
+  Serial.print("Speed ");
+
+  Serial.println(speed);
+
     if (Direction == 1) {
       analogWrite(LMOT_A, 0);
       analogWrite(LMOT_B, speed);
@@ -92,7 +96,7 @@ void BodyRot(int tPos) {   // Rotiert zu tPos
       digitalWrite(ledPin2, HIGH); 
       //heute LegMot.write(Ltemp_L);  // Dreh Left
       //FORWARD
-      LegMot(LEFT,150);
+      LegMot(LEFT,130);
    }
 
     if ((potPos <= tPos) && (mov == true)) {
@@ -102,7 +106,7 @@ void BodyRot(int tPos) {   // Rotiert zu tPos
       digitalWrite(ledPin1, HIGH); 
       //heute LegMot.write(Ltemp_R);  // Dreh Right
       //REVERSE
-      LegMot(RIGHT,150);
+      LegMot(RIGHT,130);
    }
 
     
@@ -145,7 +149,7 @@ int center(String dir) {
                   //analogWrite(DMOT_L, Rtempo); 
                   //DomeMot.write(70);
                   //DomeMot.write(40);
-                  DomeMot(LEFT,180);
+                  DomeMot(LEFT,200);
                   //digitalWrite(ledPin2, HIGH);                  
                 } 
                 
@@ -153,7 +157,7 @@ int center(String dir) {
                   //analogWrite(DMOT_R, Rtempo); 
                   //DomeMot.write(120);
                   //DomeMot.write(140);
-                  DomeMot(RIGHT,180);
+                  DomeMot(RIGHT,200);
                   //digitalWrite(ledPin1, HIGH); 
                 }
                 
