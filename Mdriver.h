@@ -149,7 +149,7 @@ int center(String dir) {
                   //analogWrite(DMOT_L, Rtempo); 
                   //DomeMot.write(70);
                   //DomeMot.write(40);
-                  DomeMot(LEFT,200);
+                  DomeMot(LEFT,240);
                   //digitalWrite(ledPin2, HIGH);                  
                 } 
                 
@@ -157,7 +157,7 @@ int center(String dir) {
                   //analogWrite(DMOT_R, Rtempo); 
                   //DomeMot.write(120);
                   //DomeMot.write(140);
-                  DomeMot(RIGHT,200);
+                  DomeMot(RIGHT,240);
                   //digitalWrite(ledPin1, HIGH); 
                 }
                 
