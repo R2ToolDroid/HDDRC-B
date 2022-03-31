@@ -5,35 +5,11 @@ String VERSION = "16-06-21-HDDRC";
 String output;
 
 //#define DEBUG
-
 byte debug = true;
-long randNumber;
-long zeit;
-unsigned long previousMillis = 0;        // will store last time LED was updated
-// constants won't change:
-const long interval = 6000;           // interval at which to blink (milliseconds)
-
-
-
-
-//Move Sensor
-byte NachL = false;
-byte NachR = false;
-byte Mitte = false;
 byte Ping = false;
-
 byte dir = false;  //false = left  true == right 
-
 int Sdiff = 0;
 
-int gap = 200;  /// 200 LOW 300 HIGH Lücke wo nichts verfolgt wird
-
-///PIN ARRANGEMENT
-
-//#define DOME_PULSE_IN 21 //RC Signal DomeRotation
-//#define BODY_PULSE_IN 16 //RC Signal Body Move
-
-//#define DMOT_L 4  //PWM SYREN DOME
 ///DOME MOTOR L298
 #define DMOT_A 5
 #define DMOT_B 6
@@ -41,18 +17,10 @@ int gap = 200;  /// 200 LOW 300 HIGH Lücke wo nichts verfolgt wird
 // Leg Motor L298 oder bt2
 #define LMOT_A 4
 #define LMOT_B 7
-
-
-#define LEFT 0
-#define RIGHT 1
-#define STOP 3
-
 #define STATUS_PIN 16  // Body Sensor or Input Ping
 #define PWM_OUT 10 // PWM Holo V Movement
-
 #define SENSOR_CENTER 8  //Center Sensor
 #define SENSOR_RC_IN 21  //PWM INPUT Sensor Dome Rotation
-
 #define LEG_POTI 9 // Position Reading Leg
 
 
@@ -65,24 +33,38 @@ int gap = 200;  /// 200 LOW 300 HIGH Lücke wo nichts verfolgt wird
 #define D_ZONE 20 // Death Zone
 bool mov = true;
 
-int MO = 0;
+//int MO = 0;
 int tPos = B_CENT;   // Target Position Body Roll
+/* 
+###############################
+MOTOR SPEED AND MOVE DEFINITONS 
+###############################
+*/
+#define LEFT 0
+#define RIGHT 1
 
-////DOME SERVO POWER
-#define DOME_PWM_R 110
-#define DOME_PWM_L 80
-///  0   - 90  - 180
-/// 50   - 90  - 130   //40
-/// 70   - 90  - 110   //20
-//int tempo = 200;
-int Htempo_R = 105; //Human Tracking Tempo
-int Htempo_L = 75; //Human Tracking Tempo
+// Gegenrichtung
+//#define LEFT 1
+//#define RIGHT 0
 
-int Ltemp_R = 60;   //Leg Speed
-int Ltemp_L = 120 ; //Leg Motor Speed
+#define STOP 3
 
-int Rtempo = 100; // Autorotation Tempo
-int Ltempo = 80; // kalkuliertes Tempo
+int gap = 200;  /// 200 LOW 300 HIGH Lücke wo nichts verfolgt wird
+
+/// Speed Definitions usualy between 0 and 255 max
+
+#define Htempo 150 //Human Tracking Tempo
+byte domeAutoSpeed = 220;     // Speed used when dome automation is active - Valid Values: 50 - 100
+
+#define Ltemp_R 150           //Leg Speed rechts
+#define Ltemp_L 150           //Leg Motor Speed links
+
+#define CenterSpeed 180       // Speed for getting Center
+#define NormSpeed 180         // Speed for usual Point Rotation
+
+#define RC_SPEED_MIN 200    
+#define RC_SPEED_MAX 255
+
 
 
 /// GRIP ARM Positions

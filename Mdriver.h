@@ -31,10 +31,6 @@ void DomeMot( int Direction, int speed){
           /// LegMot(RIGHT,255);
 void LegMot( int Direction, int speed){
 
-  Serial.print("Speed ");
-
-  Serial.println(speed);
-
     if (Direction == 1) {
       analogWrite(LMOT_A, 0);
       analogWrite(LMOT_B, speed);
@@ -73,8 +69,6 @@ void BodyRot(int tPos) {   // Rotiert zu tPos
       if (debug) {   
       Serial.print(" stop ");
       }
-      //digitalWrite(ledPin2, LOW); 
-      //digitalWrite(ledPin1, LOW); 
       //STOP
       LegMot(STOP,0);
       mov = false;
@@ -86,27 +80,21 @@ void BodyRot(int tPos) {   // Rotiert zu tPos
     
    }
 
-    //if ( potPos >= B_TOP ) {mov = false;}
-    //if ( potPos <= B_DOWN) {mov = false;}
-
+  
    if ( (potPos >= tPos) && (mov == true) ){
       if (debug) {   
       Serial.print(" left ");   
       } 
-      digitalWrite(ledPin2, HIGH); 
-      //heute LegMot.write(Ltemp_L);  // Dreh Left
-      //FORWARD
-      LegMot(LEFT,130);
+      
+      LegMot(LEFT,Ltemp_L);
    }
 
     if ((potPos <= tPos) && (mov == true)) {
       if (debug) {   
       Serial.print(" right ");
       }
-      digitalWrite(ledPin1, HIGH); 
-      //heute LegMot.write(Ltemp_R);  // Dreh Right
-      //REVERSE
-      LegMot(RIGHT,130);
+     
+      LegMot(RIGHT,Ltemp_R);
    }
 
     
@@ -128,7 +116,8 @@ void BodyRot(int tPos) {   // Rotiert zu tPos
 
 
 int center(String dir) {
-    /// Fuert den Dome in die Ausgangsposition //
+  
+   /// Fuert den Dome in die Ausgangsposition //
    centerState = digitalRead(SENSOR_CENTER);  
    if (debug) {   
     Serial.print(F("CenterMode "));
@@ -136,9 +125,7 @@ int center(String dir) {
     Serial.print(F("Dir "));
     Serial.println(dir);
    }
-    //analogWrite(DMOT_R, 0); 
-    //analogWrite(DMOT_L, 0); 
-    //DomeMot.write(90);
+    
      DomeMot(STOP,0);
       
       while ( centerState == 0){
@@ -146,36 +133,26 @@ int center(String dir) {
                  centerState = digitalRead(SENSOR_CENTER);  
                 
                 if (dir == "L" ) {
-                  //analogWrite(DMOT_L, Rtempo); 
-                  //DomeMot.write(70);
-                  //DomeMot.write(40);
-                  DomeMot(LEFT,240);
-                  //digitalWrite(ledPin2, HIGH);                  
+                  
+                  DomeMot(LEFT,CenterSpeed);
+                                 
                 } 
                 
                 if (dir == "R") {
-                  //analogWrite(DMOT_R, Rtempo); 
-                  //DomeMot.write(120);
-                  //DomeMot.write(140);
-                  DomeMot(RIGHT,240);
-                  //digitalWrite(ledPin1, HIGH); 
+                  
+                  DomeMot(RIGHT,CenterSpeed);
+                 
                 }
                 
                 if (debug){Serial.println(F("try to get center"));Serial.print(SENSOR_CENTER);}
-              
- 
+
       }
 
    DomeMot(STOP,0);
-   //digitalWrite(ledPin1, LOW); 
-   //digitalWrite(ledPin2, LOW); 
-   //analogWrite(DMOT_L, 0);  
-   //analogWrite(DMOT_R, 0);  
-   //DomeMot.write(90);
    delay(200);
    durchlauf = 0;
    
-   //Mode = 0; 
+   
 }
 
 void FindRoTime(){
@@ -196,41 +173,18 @@ void FindRoTime(){
 
 
 void rotateR( int Rposi) {
-  
-     //digitalWrite(ledPin1, HIGH); 
-     //DomeMot.write(DOME_PWM_R);
-     DomeMot(RIGHT,200);
-     //analogWrite(DMOT_L, 0); 
-     //analogWrite(DMOT_R, Rtempo);
-     delay (Rposi);
-     //digitalWrite(ledPin1, LOW); 
-     //DomeMot.write(90);
+    
+     DomeMot(RIGHT,NormSpeed);   
+     delay (Rposi); 
      DomeMot(STOP,0);
-     //analogWrite(DMOT_L, 0); 
-     //analogWrite(DMOT_R, 0);
-
-     if (debug){
-      Serial.print("PWM ");
-      Serial.print(DOME_PWM_R);
-      Serial.print(" Time ");
-      Serial.println(Rposi);
-     }
-     
+    
           
 }
 
 void rotateL( int Rpos) {
 
-     //digitalWrite(ledPin2, HIGH); 
-     //analogWrite(DMOT_R, 0); 
-     //analogWrite(DMOT_L, Rtempo);
-     //DomeMot.write(DOME_PWM_L);
-     DomeMot(LEFT,180);
+     DomeMot(LEFT,NormSpeed);
      delay (Rpos);
-     //digitalWrite(ledPin2, LOW); 
-     //analogWrite(DMOT_L, 0); 
-     //analogWrite(DMOT_R, 0);
-     //DomeMot.write(90);
      DomeMot(STOP,0);
   
 }
@@ -253,7 +207,7 @@ int rcMove() {
     if (sensorValue < 1450){
       
      
-      int tempoR = map (sensorValue, 1460, 1150,200,255);
+      int tempoR = map (sensorValue, 1460, 1150,RC_SPEED_MIN,RC_SPEED_MAX);
      
      // if (tempoR >= 180) {tempoR=255;}
          
@@ -274,7 +228,7 @@ int rcMove() {
      // set the LED with the ledState of the variable:
       //digitalWrite(ledPin1, HIGH); 
       //tempo = sensorValue ;////6;
-      int tempoL = map(sensorValue, 1450,1850,200,255);
+      int tempoL = map(sensorValue, 1450,1850,RC_SPEED_MIN,RC_SPEED_MAX);
       //tempo = tempo /5;
       //DomeMot.write(tempoL);
       DomeMot(LEFT,tempoL);
@@ -380,12 +334,9 @@ void human(){
                Serial.print("Dreh nach Links");
                Serial.println(Lpulse);
             }
-            //digitalWrite(ledPin2, HIGH);  //Dreh nach L
-                //analogWrite(DMOT_L,Htempo); 
-                //DomeMot.write(Htempo_L);
-                //DomeMot.write(Lpulse);
-                DomeMot(LEFT,150);
-                //servoDispatch.moveTo(0,50,0,500);
+           
+                DomeMot(LEFT,Htempo);
+              
                 
            }    
            
@@ -397,23 +348,15 @@ void human(){
                 Serial.print("Dreh nach Rechts");
                 Serial.println(Rpulse);
               }
-                //digitalWrite(ledPin1, HIGH);  //Dreh nach R
-                //analogWrite(DMOT_R,Htempo);
-                //DomeMot.write(Htempo_R); 
-                //DomeMot.write(Rpulse); 
-                DomeMot(RIGHT,150);
-                //servoDispatch.moveTo(0,50,0,1200);
+
+                DomeMot(RIGHT,Htempo);
+               
                 
            } 
         } else {
-          //analogWrite(DMOT_R, 0); 
-          //analogWrite(DMOT_L, 0); 
-          //digitalWrite(ledPin2, LOW);  //Dreh nach L
-          //digitalWrite(ledPin1, LOW);  //Dreh nach R
-          //DomeMot.write(90);
+          
           DomeMot(STOP,0);
-          //Serial.println("--Mitte--");
-         // tempPos = 90;
+         
           
         }
 

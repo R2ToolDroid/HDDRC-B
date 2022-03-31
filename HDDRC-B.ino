@@ -29,14 +29,9 @@ PIN MAPPING
 #include "vars.h"
 #include "Grove_Human_Presence_Sensor.h" // der SoftwareSerial Bibliothek nutzen.
 SoftwareSerial MainInput(14, 15); // Pin D14 ist RX, Pin D15 ist TX.
-//SoftwareSerial smcSerial = SoftwareSerial(rxPin, txPin);
-
-                                   // Die Funktion softSerial() kann nun wie Serial() genutzt werden.     
+  
 Servo HoloV; ///PWM_OUT PIN 10
 Servo ArmSrv; //PWM OUT PIN 16
-//Servo DomeMot; // PWM OUT PIN 4
-
-
 
 AK9753 movementSensor;
 
@@ -50,11 +45,7 @@ float temp = 24;
 
 void setup(){
 
-   
-
   HoloV.attach(PWM_OUT);  // PIN 10
- // DomeMot.attach(DMOT_L); // PIN 4
-  
   ArmSrv.attach(STATUS_PIN);
   ArmSrv.write(ARM_IN);
    
@@ -64,11 +55,11 @@ void setup(){
   pinMode(ledPin1, OUTPUT);
   pinMode(ledPin2, OUTPUT);
   pinMode(ledPinC, OUTPUT);
+  pinMode(DMOT_A, OUTPUT);
+  pinMode(DMOT_B, OUTPUT); 
+  pinMode(LMOT_A, OUTPUT);
+  pinMode(LMOT_B, OUTPUT); 
 
-  //pinMode(DMOT_L, OUTPUT);
-  //pinMode(DMOT_R, OUTPUT); 
-
-  //pinMode(STATUS_PIN, INPUT_PULLUP); 
   pinMode(SENSOR_CENTER,  INPUT_PULLUP);
  
   //digitalWrite(DMOT_L, 0);  
@@ -83,11 +74,7 @@ void setup(){
   //delay(2000);
   Serial.println("DomeController_ Doc Tooldroide");
   Serial.println("...ready for Command_");
-  
-  //startseq();
-
-//   SetupEvent::ready();
-   Wire.begin();
+    Wire.begin();
 
    //Turn on sensor
     if (movementSensor.initialize() == false) {
@@ -98,10 +85,7 @@ void setup(){
 
   
   HoloV.write(90);
-  //DomeMot.write(90);
-  //ArmSrv.write(ARM_IN);
-  //ServoTouch(false);
-  //center("L");
+ 
 }
 
 
