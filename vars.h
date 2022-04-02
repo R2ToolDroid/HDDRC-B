@@ -1,11 +1,11 @@
 #include <Arduino.h>                           
 
 String data; //Consohlen Input
-String VERSION = "16-06-21-HDDRC";
+String VERSION = "3-04-22-HDDRC-B";
 String output;
 
 //#define DEBUG
-byte debug = true;
+byte debug = false;
 byte Ping = false;
 byte dir = false;  //false = left  true == right 
 int Sdiff = 0;
@@ -53,16 +53,16 @@ int gap = 200;  /// 200 LOW 300 HIGH Lücke wo nichts verfolgt wird
 
 /// Speed Definitions usualy between 0 and 255 max
 
-#define Htempo 150 //Human Tracking Tempo
+#define Htempo 180 //Human Tracking Tempo
 byte domeAutoSpeed = 220;     // Speed used when dome automation is active - Valid Values: 50 - 100
 
-#define Ltemp_R 150           //Leg Speed rechts
-#define Ltemp_L 150           //Leg Motor Speed links
+#define Ltemp_R 130          //Leg Speed rechts
+#define Ltemp_L 130           //Leg Motor Speed links
 
-#define CenterSpeed 180       // Speed for getting Center
-#define NormSpeed 180         // Speed for usual Point Rotation
+#define CenterSpeed 240       // Speed for getting Center
+#define NormSpeed 240         // Speed for usual Point Rotation
 
-#define RC_SPEED_MIN 200    
+#define RC_SPEED_MIN 180    
 #define RC_SPEED_MAX 255
 
 
