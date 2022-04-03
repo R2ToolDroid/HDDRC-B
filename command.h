@@ -145,6 +145,13 @@ void ProzessComando() {
       //delay(1000);
       Mode = 3;
       }
+    if (data == "mode4"){
+      Serial.println(F("Mode 4 Service"));
+      //delay(1000);
+      Mode = 4;
+      }
+
+      
     if (data == "mode2"){
       Serial.println(F("Mode 2 Human"));
       //delay(1000);

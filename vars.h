@@ -12,16 +12,17 @@ int Sdiff = 0;
 
 ///DOME MOTOR L298
 #define DMOT_A 5
-#define DMOT_B 6
+#define DMOT_B 6    //6  mit 7
 
 // Leg Motor L298 oder bt2
-#define LMOT_A 4
-#define LMOT_B 7
+#define LMOT_A 4   // 4 before
+#define LMOT_B 7   //7 tausche mit 6
+
 #define STATUS_PIN 16  // Body Sensor or Input Ping
-#define PWM_OUT 10 // PWM Holo V Movement
+#define PWM_OUT 10 // 10 PWM Holo V Movement
 #define SENSOR_CENTER 8  //Center Sensor
 #define SENSOR_RC_IN 21  //PWM INPUT Sensor Dome Rotation
-#define LEG_POTI 9 // Position Reading Leg
+#define LEG_POTI 9 // 9 Before Position Reading Leg
 
 
 //Body Positionen
@@ -53,11 +54,11 @@ int gap = 200;  /// 200 LOW 300 HIGH Lücke wo nichts verfolgt wird
 
 /// Speed Definitions usualy between 0 and 255 max
 
-#define Htempo 180 //Human Tracking Tempo
+int Htempo = 180; //Human Tracking Tempo
 byte domeAutoSpeed = 220;     // Speed used when dome automation is active - Valid Values: 50 - 100
 
-#define Ltemp_R 130          //Leg Speed rechts
-#define Ltemp_L 130           //Leg Motor Speed links
+int Ltemp_R = 210;          //Leg Speed rechts
+int Ltemp_L = 210;         //Leg Motor Speed links
 
 #define CenterSpeed 240       // Speed for getting Center
 #define NormSpeed 240         // Speed for usual Point Rotation
@@ -83,7 +84,7 @@ unsigned long zeit1, zeit2;
 //int sensorRC = 21; ///von 2 auf 21 geänder wg I2C  Dome Rotation
 
 //int sensorRC_out = 10;
-int Mode = 0;// 0=RandMove // 1=RCMove  //2=human //3=Service
+int Mode = 0;// 0=RandMove // 1=RCMove  //2=human //3=Service // 4= Debug
 int moving = 0;
 
 //#### Status Signal fom 16  ACTUAL INACTIVE

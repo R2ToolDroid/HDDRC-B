@@ -6,12 +6,12 @@ PIN MAPPING
 
   PIN 2  SDA
   PIN 3  SCL
-  PIN 4  --  LEG B   Dome Mot PWM
+  PIN 4  --  LEG B   Dome Mot PWM  Move to 9
   PIN 5   TXsmc  DOME A
   PIN 6   RXsmc  DOME B 
   PIN 7  --- LEG A  frei  vorher LegMOt
   PIN 8  SENSOR_CENTER
-  PIN 9  LEG_POTI
+  PIN 9  LEG_POTI                 Move to 4
   PIN 10 PWM_OUT HOLO
   PIN 14 Rx  Main
   PIN 15 Tx  Main
@@ -33,6 +33,10 @@ SoftwareSerial MainInput(14, 15); // Pin D14 ist RX, Pin D15 ist TX.
 Servo HoloV; ///PWM_OUT PIN 10
 Servo ArmSrv; //PWM OUT PIN 16
 
+//Servo LEG_A; // PWM
+//Servo LEG_B; // PWM
+
+
 AK9753 movementSensor;
 
 int ir1, ir2, ir3, ir4;
@@ -47,6 +51,9 @@ void setup(){
 
   HoloV.attach(PWM_OUT);  // PIN 10
   ArmSrv.attach(STATUS_PIN);
+  //LEG_A.attach(LMOT_A);
+  //LEG_B.attach(LMOT_B);
+  
   ArmSrv.write(ARM_IN);
    
   Serial.begin(115200);
@@ -119,6 +126,19 @@ void loop() {
   }
   
   //BodyRot(tPos);
+  if (Mode == 4  ){
+    //BodyRot(tPos);
+    for (int i=0; i<=255; i++) {
+        analogWrite(DMOT_A, i);
+        //analogWrite(LMOT_B, i);
+        delay (100);
+        Serial.println(i);
+    }
+    
+  }
+
+
+
   
   if (durchlauf == 10 ) {
       center("L");

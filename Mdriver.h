@@ -29,28 +29,42 @@ void DomeMot( int Direction, int speed){
     }
 }
           /// LegMot(RIGHT,255);
-void LegMot( int Direction, byte PWR){
+void LegMot( int Direction, int speed){
 
     if (Direction == 1) {
       analogWrite(LMOT_A, 0);
-      analogWrite(LMOT_B, PWR);
+      analogWrite(LMOT_B, speed);
+
+      //LEG_A.detach();
+      //LEG_B.attach(LMOT_B);
+      //LEG_B.write(180);
+      
       digitalWrite(ledPin2, LOW); 
       digitalWrite(ledPin1, HIGH);
     }
 
     if (Direction == 0) {
-      analogWrite(LMOT_A, PWR);
+      analogWrite(LMOT_A, speed);
       analogWrite(LMOT_B, 0);
+
+      //LEG_B.detach();
+      //LEG_A.attach(LMOT_A);
+      //LEG_A.write(180);
+      
       digitalWrite(ledPin2, HIGH); 
       digitalWrite(ledPin1, LOW);
     }
 
-    if ((PWR == 0)||(Direction == STOP) ) {
+    if ((speed == 0)||(Direction == STOP) ) {
       digitalWrite(ledPin2, LOW); 
       digitalWrite(ledPin1, LOW); 
       analogWrite(LMOT_A, 0);
       analogWrite(LMOT_B, 0);
-      
+
+      //LEG_A.write(90);
+      //LEG_B.write(90);
+      //LEG_B.detach();
+      //LEG_A.detach();
     }
 }
 
@@ -195,7 +209,7 @@ int rcMove() {
     int sensorValue = pulseIn(SENSOR_RC_IN,HIGH);
 
     if (debug){ 
-       Serial.println(F("Rechts"));
+       Serial.print(F("Rechts"));
        Serial.print(F("Sensor IN "));Serial.println(sensorValue);
       } 
     //return;
@@ -214,12 +228,14 @@ int rcMove() {
      //digitalWrite(ledPin2, HIGH); 
      //DomeMot.write(tempoR);
      DomeMot(LEFT,tempoR);
+      //LegMot(LEFT,tempoR);
+     
      //analogWrite(DMOT_L, 0); 
      //analogWrite(DMOT_R, tempoR); 
 
      if (debug){ 
-        Serial.print(F("Rechts"));
-         Serial.print(F("tempoR "));Serial.println(tempoR);
+        //Serial.print(F("Rechts"));
+         Serial.print(F("  tempoR "));Serial.println(tempoR);
       } 
     
     
@@ -232,6 +248,7 @@ int rcMove() {
       //tempo = tempo /5;
       //DomeMot.write(tempoL);
       DomeMot(RIGHT,tempoL);
+      //LegMot(RIGHT,tempoL);
       //analogWrite(DMOT_R, 0);  
       //analogWrite(DMOT_L, tempoL); 
       if (debug) {
@@ -254,7 +271,7 @@ int rcMove() {
   if (debug) { 
     //Serial.print(F("TempoL "));Serial.print(tempoL);
     //Serial.print(F("  TempoR "));Serial.print(tempoR);
-    Serial.print(F("   Value "));Serial.println(sensorValue);
+    //Serial.print(F("   Value "));Serial.println(sensorValue);
     }
   
 }
