@@ -134,16 +134,19 @@ void ProzessComando() {
       //center("L");
       //delay(1000);
       Mode = 1;
+      ArmSrv.detach();
       }
     if (data == "mode0"){
       Serial.println(F("Mode 0 Random"));
       //delay(1000);
       Mode = 0;
+      ArmSrv.detach();
       }
     if (data == "mode3"){
       Serial.println(F("Mode 3 Service"));
       //delay(1000);
       Mode = 3;
+      ArmSrv.attach(STATUS_PIN);
       }
     if (data == "mode4"){
       Serial.println(F("Mode 4 Service"));
@@ -155,6 +158,7 @@ void ProzessComando() {
     if (data == "mode2"){
       Serial.println(F("Mode 2 Human"));
       //delay(1000);
+      ArmSrv.detach();
       Mode = 2;
       }  
      

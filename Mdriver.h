@@ -32,9 +32,10 @@ void DomeMot( int Direction, int speed){
 void LegMot( int Direction, int speed){
 
     if (Direction == 1) {
-      analogWrite(LMOT_A, 0);
-      analogWrite(LMOT_B, speed);
-
+      //analogWrite(LMOT_A, 0);
+      //analogWrite(LMOT_B, speed);
+      SoftPWMSet(LMOT_A, 0);
+      SoftPWMSet(LMOT_B, speed);
       //LEG_A.detach();
       //LEG_B.attach(LMOT_B);
       //LEG_B.write(180);
@@ -44,8 +45,10 @@ void LegMot( int Direction, int speed){
     }
 
     if (Direction == 0) {
-      analogWrite(LMOT_A, speed);
-      analogWrite(LMOT_B, 0);
+      //analogWrite(LMOT_A, speed);
+      //analogWrite(LMOT_B, 0);
+      SoftPWMSet(LMOT_A, speed);
+      SoftPWMSet(LMOT_B, 0);
 
       //LEG_B.detach();
       //LEG_A.attach(LMOT_A);
@@ -58,8 +61,10 @@ void LegMot( int Direction, int speed){
     if ((speed == 0)||(Direction == STOP) ) {
       digitalWrite(ledPin2, LOW); 
       digitalWrite(ledPin1, LOW); 
-      analogWrite(LMOT_A, 0);
-      analogWrite(LMOT_B, 0);
+      //analogWrite(LMOT_A, 0);
+      //analogWrite(LMOT_B, 0);
+      SoftPWMSet(LMOT_A, 0);
+      SoftPWMSet(LMOT_B, 0);
 
       //LEG_A.write(90);
       //LEG_B.write(90);

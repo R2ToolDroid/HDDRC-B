@@ -25,6 +25,8 @@ PIN MAPPING
 #include <SoftwareSerial.h>        // Durch diesen Include können wir die Funktionen 
 #include <Servo.h>
 
+#include "SoftPWM.h"
+
 #include <Wire.h>  
 #include "vars.h"
 #include "Grove_Human_Presence_Sensor.h" // der SoftwareSerial Bibliothek nutzen.
@@ -48,6 +50,8 @@ float temp = 24;
 
 
 void setup(){
+
+  SoftPWMBegin();
 
   HoloV.attach(PWM_OUT);  // PIN 10
   ArmSrv.attach(STATUS_PIN);
@@ -92,6 +96,9 @@ void setup(){
 
   
   HoloV.write(90);
+
+  SoftPWMSet(LMOT_A, 0);
+  SoftPWMSet(LMOT_B, 0);
  
 }
 
@@ -126,16 +133,20 @@ void loop() {
   }
   
   //BodyRot(tPos);
+  /*
   if (Mode == 4  ){
     //BodyRot(tPos);
     for (int i=0; i<=255; i++) {
-        analogWrite(DMOT_A, i);
+        //analogWrite(LMOT_A, i);
+
+        SoftPWMSet(4, i);  //LMOT_A
         //analogWrite(LMOT_B, i);
         delay (100);
         Serial.println(i);
     }
     
   }
+  */
 
 
 

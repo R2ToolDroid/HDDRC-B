@@ -1,7 +1,7 @@
 #include <Arduino.h>                           
 
 String data; //Consohlen Input
-String VERSION = "3-04-22-HDDRC-B";
+String VERSION = "10-04-22-HDDRC-B";
 String output;
 
 //#define DEBUG
@@ -57,8 +57,8 @@ int gap = 200;  /// 200 LOW 300 HIGH Lücke wo nichts verfolgt wird
 int Htempo = 180; //Human Tracking Tempo
 byte domeAutoSpeed = 220;     // Speed used when dome automation is active - Valid Values: 50 - 100
 
-int Ltemp_R = 130;          //Leg Speed rechts
-int Ltemp_L = 130;         //Leg Motor Speed links
+int Ltemp_R = 180;          //Leg Speed rechts
+int Ltemp_L = 180;         //Leg Motor Speed links
 
 #define CenterSpeed 240       // Speed for getting Center
 #define NormSpeed 240         // Speed for usual Point Rotation
@@ -84,7 +84,7 @@ unsigned long zeit1, zeit2;
 //int sensorRC = 21; ///von 2 auf 21 geänder wg I2C  Dome Rotation
 
 //int sensorRC_out = 10;
-int Mode = 0;// 0=RandMove // 1=RCMove  //2=human //3=Service // 4= Debug
+int Mode = 3;// 0=RandMove // 1=RCMove  //2=human //3=Service // 4= Debug
 int moving = 0;
 
 //#### Status Signal fom 16  ACTUAL INACTIVE
