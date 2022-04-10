@@ -84,7 +84,7 @@ unsigned long zeit1, zeit2;
 //int sensorRC = 21; ///von 2 auf 21 geänder wg I2C  Dome Rotation
 
 //int sensorRC_out = 10;
-int Mode = 3;// 0=RandMove // 1=RCMove  //2=human //3=Service // 4= Debug
+int Mode = 0;// 0=RandMove // 1=RCMove  //2=human //3=Service // 4= Debug
 int moving = 0;
 
 //#### Status Signal fom 16  ACTUAL INACTIVE
