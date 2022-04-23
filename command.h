@@ -5,12 +5,12 @@ void ProzessComando() {
 
       if(data == "l"){      
      // gap = 300;
-        DomeMot(LEFT,230);
+        DomeMot(LEFT,220);
       }
 
       if(data == "r"){      
      // gap = 300;
-     DomeMot(RIGHT,230);
+     DomeMot(RIGHT,220);
      
       }
 

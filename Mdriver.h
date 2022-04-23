@@ -6,21 +6,23 @@ bool inRange(int val, int minimum, int maximum){
 
 void DomeMot( int Direction, int speed){
 
-  if (debug) {   
-      Serial.print(" DIR ");
-      Serial.println(Direction);
-      }
+  
 
     if (Direction == 1) {  //LEFT
-      analogWrite(DMOT_A, speed);
-      analogWrite(DMOT_B, 0);
+      //analogWrite(DMOT_A, speed);
+      //analogWrite(DMOT_B, 0);
+
+      SoftPWMSet(DMOT_A, speed);
+      SoftPWMSet(DMOT_B, 0);
       digitalWrite(ledPin2, LOW); 
       digitalWrite(ledPin1, HIGH);
     }
 
     if (Direction == 0) {
-      analogWrite(DMOT_A, 0);
-      analogWrite(DMOT_B, speed);
+      //analogWrite(DMOT_A, 0);
+      //analogWrite(DMOT_B, speed);
+      SoftPWMSet(DMOT_A, 0);
+      SoftPWMSet(DMOT_B, speed);
       digitalWrite(ledPin2, HIGH); 
       digitalWrite(ledPin1, LOW);
     }
@@ -28,8 +30,10 @@ void DomeMot( int Direction, int speed){
     if ((speed == 0) ||(Direction == STOP)) {
       digitalWrite(ledPin2, LOW); 
       digitalWrite(ledPin1, LOW); 
-      analogWrite(DMOT_A, 0);
-      analogWrite(DMOT_B, 0);
+      //analogWrite(DMOT_A, 0);
+      //analogWrite(DMOT_B, 0);
+      SoftPWMSet(DMOT_A, 0);
+      SoftPWMSet(DMOT_B, 0);
       
     }
 }
@@ -221,70 +225,49 @@ int rcMove() {
     int sensorValue = pulseIn(SENSOR_RC_IN,HIGH);
 
     if (debug){ 
-       Serial.print(F("Rechts"));
+      // Serial.print(F("Rechts"));
        Serial.print(F("Sensor IN "));Serial.println(sensorValue);
       } 
-    //return;
-    //int tempo = map (sensorValue, 530, 2000,0,180);
     
-    if (sensorValue >=800){ ///Check if Sensor is Connectet an RC on
+    if (sensorValue >=600){ ///Check if Sensor is Connectet an RC on
 
     
-    if (sensorValue < 1450){
-      
+      if (sensorValue > 1050){
+        
+           int tempoR = map (sensorValue, 1000, 1200,RC_SPEED_MIN,RC_SPEED_MAX);
      
-      int tempoR = map (sensorValue, 1460, 1150,RC_SPEED_MIN,RC_SPEED_MAX);
-     
-     // if (tempoR >= 180) {tempoR=255;}
-         
-     //digitalWrite(ledPin2, HIGH); 
-     //DomeMot.write(tempoR);
-     DomeMot(LEFT,tempoR);
-      //LegMot(LEFT,tempoR);
-     
-     //analogWrite(DMOT_L, 0); 
-     //analogWrite(DMOT_R, tempoR); 
-
-     if (debug){ 
-        //Serial.print(F("Rechts"));
-         Serial.print(F("  tempoR "));Serial.println(tempoR);
-      } 
+            if (tempoR >= 255) {tempoR=255;}
     
+              DomeMot(RIGHT,tempoR);
+            if (debug){ 
+                Serial.print(F("Rechts"));
+                 Serial.print(F("  tempoR "));Serial.println(tempoR);
+            } 
     
-    } else if (sensorValue > 1550) {
+    } else if (sensorValue < 930) {
           
-     // set the LED with the ledState of the variable:
-      //digitalWrite(ledPin1, HIGH); 
-      //tempo = sensorValue ;////6;
-      int tempoL = map(sensorValue, 1450,1850,RC_SPEED_MIN,RC_SPEED_MAX);
-      //tempo = tempo /5;
-      //DomeMot.write(tempoL);
-      DomeMot(RIGHT,tempoL);
-      //LegMot(RIGHT,tempoL);
-      //analogWrite(DMOT_R, 0);  
-      //analogWrite(DMOT_L, tempoL); 
+    
+      
+      int tempoL = map(sensorValue, 950,750,RC_SPEED_MIN,RC_SPEED_MAX);
+      if (tempoL >= 255) {tempoL=255;}
+      
+      
+      DomeMot(LEFT,tempoL);
+      
       if (debug) {
-      Serial.print(F("Links"));
+      Serial.print(F(" Links "));
       Serial.print(F("tempoL "));Serial.println(tempoL);
       }   
      
     }  else {
-      //analogWrite(DMOT_L, 0);  
-      //digitalWrite(ledPin1, LOW); 
-      //analogWrite(DMOT_R, 0); 
-      //digitalWrite(ledPin2, LOW); 
+      
       DomeMot(STOP,0);
-      //DomeMot.write(90);    
-      //delay (zeit);    
+       
     }
 
     }///End Sensor Check
     
-  if (debug) { 
-    //Serial.print(F("TempoL "));Serial.print(tempoL);
-    //Serial.print(F("  TempoR "));Serial.print(tempoR);
-    //Serial.print(F("   Value "));Serial.println(sensorValue);
-    }
+  
   
 }
 

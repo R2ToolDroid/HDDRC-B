@@ -99,6 +99,9 @@ void setup(){
 
   SoftPWMSet(LMOT_A, 0);
   SoftPWMSet(LMOT_B, 0);
+  SoftPWMSet(DMOT_A, 0);
+  SoftPWMSet(DMOT_B, 0);
+  
  
 }
 
