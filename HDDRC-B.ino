@@ -133,9 +133,10 @@ void loop() {
   }
   
   //BodyRot(tPos);
-  /*
+  
   if (Mode == 4  ){
     //BodyRot(tPos);
+    /*
     for (int i=0; i<=255; i++) {
         //analogWrite(LMOT_A, i);
 
@@ -144,9 +145,10 @@ void loop() {
         delay (100);
         Serial.println(i);
     }
+    */
     
   }
-  */
+  
 
 
 

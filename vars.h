@@ -60,7 +60,7 @@ byte domeAutoSpeed = 220;     // Speed used when dome automation is active - Val
 int Ltemp_R = 180;          //Leg Speed rechts
 int Ltemp_L = 180;         //Leg Motor Speed links
 
-int CenterSpeed = 240;       // Speed for getting Center
+int CenterSpeed = 255;       // Speed for getting Center
 int NormSpeed = 240;         // Speed for usual Point Rotation
 
 int RC_SPEED_MIN = 180;    
@@ -84,7 +84,7 @@ unsigned long zeit1, zeit2;
 //int sensorRC = 21; ///von 2 auf 21 geänder wg I2C  Dome Rotation
 
 //int sensorRC_out = 10;
-int Mode = 0;// 0=RandMove // 1=RCMove  //2=human //3=Service // 4= Debug
+int Mode = 4;// 0=RandMove // 1=RCMove  //2=human //3=Service // 4= Debug
 int moving = 0;
 
 //#### Status Signal fom 16  ACTUAL INACTIVE

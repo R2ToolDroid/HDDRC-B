@@ -3,6 +3,24 @@
 //// Commandos ///////
 void ProzessComando() {
 
+      if(data == "l"){      
+     // gap = 300;
+        DomeMot(LEFT,230);
+      }
+
+      if(data == "r"){      
+     // gap = 300;
+     DomeMot(RIGHT,230);
+     
+      }
+
+      if(data == "s"){      
+     // gap = 300;
+     DomeMot(STOP,0);
+     
+      }
+      
+
        
       
       Serial.print("Data =");

@@ -6,6 +6,11 @@ bool inRange(int val, int minimum, int maximum){
 
 void DomeMot( int Direction, int speed){
 
+  if (debug) {   
+      Serial.print(" DIR ");
+      Serial.println(Direction);
+      }
+
     if (Direction == 1) {  //LEFT
       analogWrite(DMOT_A, speed);
       analogWrite(DMOT_B, 0);
@@ -31,10 +36,7 @@ void DomeMot( int Direction, int speed){
           /// LegMot(RIGHT,255);
 void LegMot( int Direction, int speed){
 
-  if (debug) {   
-      Serial.print(" DIR ");
-      Serial.println(Direction);
-      }
+  
 
     if (Direction == 1) {
       //analogWrite(LMOT_A, 0);
