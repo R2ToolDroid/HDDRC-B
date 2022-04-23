@@ -1,10 +1,8 @@
 ///Automatische Domebewegung Steuerung
 ///Doc Snyder Tool Droid DomeController
-<<<<<<< Updated upstream
-///für Arduino pro mini
-=======
+
+
 ///für Arduino pro mini  actual
->>>>>>> Stashed changes
 /*
 PIN MAPPING
 

@@ -1,11 +1,9 @@
 #include <Arduino.h>                           
 
 String data; //Consohlen Input
-<<<<<<< Updated upstream
-String VERSION = "10-04-22-HDDRC-B";
-=======
+
 String VERSION = "23-04-22-HDDRC-B";
->>>>>>> Stashed changes
+
 String output;
 
 //#define DEBUG
