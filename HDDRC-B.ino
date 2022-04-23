@@ -114,6 +114,7 @@ void loop() {
 
   if (Mode == 0){
      autoDome();
+     rcMove();
      //durchlauf = durchlauf+1;
      
   }

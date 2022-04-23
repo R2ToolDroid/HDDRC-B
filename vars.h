@@ -59,8 +59,8 @@ int gap = 200;  /// 200 LOW 300 HIGH Lücke wo nichts verfolgt wird
 int Htempo = 180; //Human Tracking Tempo
 byte domeAutoSpeed = 220;     // Speed used when dome automation is active - Valid Values: 50 - 100
 
-int Ltemp_R = 150;          //Leg Speed rechts
-int Ltemp_L = 150;         //Leg Motor Speed links
+int Ltemp_R = 100;          //Leg Speed rechts
+int Ltemp_L = 100;         //Leg Motor Speed links
 
 int CenterSpeed = 240;       // Speed for getting Center
 int NormSpeed = 240;         // Speed for usual Point Rotation
