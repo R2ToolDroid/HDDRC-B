@@ -1,84 +1,75 @@
 #include <Arduino.h>                           
 
 String data; //Consohlen Input
-String VERSION = "16-06-21-HDDRC";
+<<<<<<< Updated upstream
+String VERSION = "10-04-22-HDDRC-B";
+=======
+String VERSION = "23-04-22-HDDRC-B";
+>>>>>>> Stashed changes
 String output;
 
 //#define DEBUG
-
-byte debug = true;
-long randNumber;
-long zeit;
-unsigned long previousMillis = 0;        // will store last time LED was updated
-// constants won't change:
-const long interval = 6000;           // interval at which to blink (milliseconds)
-
-
-
-
-//Move Sensor
-byte NachL = false;
-byte NachR = false;
-byte Mitte = false;
+byte debug = false;
 byte Ping = false;
-
 byte dir = false;  //false = left  true == right 
-
 int Sdiff = 0;
 
-int gap = 200;  /// 200 LOW 300 HIGH Lücke wo nichts verfolgt wird
+///DOME MOTOR L298
+#define DMOT_A 5
+#define DMOT_B 6    //6  mit 7
 
-///PIN ARRANGEMENT
-
-//#define DOME_PULSE_IN 21 //RC Signal DomeRotation
-//#define BODY_PULSE_IN 16 //RC Signal Body Move
-
-#define DMOT_L 4  //PWM SYREN DOME
-
-//#define DMOT_R 6  //L298 MotorIN2
-
-#define BMOT_L 7  //PWM LEG MOT POLOLU
-
-//#define BMOT_R 4  //L298 MotorIN4
+// Leg Motor L298 oder bt2
+#define LMOT_A 4   // 4 before
+#define LMOT_B 7   //7 tausche mit 6
 
 #define STATUS_PIN 16  // Body Sensor or Input Ping
-#define PWM_OUT 10 // PWM Holo V Movement
-
+#define PWM_OUT 10 // 10 PWM Holo V Movement
 #define SENSOR_CENTER 8  //Center Sensor
 #define SENSOR_RC_IN 21  //PWM INPUT Sensor Dome Rotation
+#define LEG_POTI 9 // 9 Before Position Reading Leg
 
-#define LEG_POTI 9 // Position Reading Leg
-
-#define M_LEFT 1
-#define M_RIGHT 2
-#define M_STOP 3
 
 //Body Positionen
 
-#define B_TOP  80 //Body Hoch
+#define B_TOP  300 //Body Hoch
+#define C_DRIVEPOS 120//
 #define B_DOWN  700 //Body Down
 #define B_CENT 500 //Boby Center
 #define D_ZONE 20 // Death Zone
 bool mov = true;
 
-int MO = 0;
+//int MO = 0;
 int tPos = B_CENT;   // Target Position Body Roll
+/* 
+###############################
+MOTOR SPEED AND MOVE DEFINITONS 
+###############################
+*/
+#define LEFT 0
+#define RIGHT 1
 
-////DOME SERVO POWER
-#define DOME_PWM_R 110
-#define DOME_PWM_L 80
-///  0   - 90  - 180
-/// 50   - 90  - 130   //40
-/// 70   - 90  - 110   //20
-//int tempo = 200;
-int Htempo_R = 105; //Human Tracking Tempo
-int Htempo_L = 75; //Human Tracking Tempo
+// Gegenrichtung
+//#define LEFT 1
+//#define RIGHT 0
 
-int Ltemp_R = 50;   //Leg Speed
-int Ltemp_L = 140 ; //Leg Motor Speed
+#define STOP 3
 
-int Rtempo = 100; // Autorotation Tempo
-int Ltempo = 80; // kalkuliertes Tempo
+int gap = 200;  /// 200 LOW 300 HIGH Lücke wo nichts verfolgt wird
+
+/// Speed Definitions usualy between 0 and 255 max
+
+int Htempo = 180; //Human Tracking Tempo
+byte domeAutoSpeed = 220;     // Speed used when dome automation is active - Valid Values: 50 - 100
+
+int Ltemp_R = 150;          //Leg Speed rechts
+int Ltemp_L = 150;         //Leg Motor Speed links
+
+int CenterSpeed = 240;       // Speed for getting Center
+int NormSpeed = 240;         // Speed for usual Point Rotation
+
+int RC_SPEED_MIN = 150;    
+int RC_SPEED_MAX = 255;
+
 
 
 /// GRIP ARM Positions
@@ -97,7 +88,7 @@ unsigned long zeit1, zeit2;
 //int sensorRC = 21; ///von 2 auf 21 geänder wg I2C  Dome Rotation
 
 //int sensorRC_out = 10;
-int Mode = 0;// 0=RandMove // 1=RCMove  //2=human //3=Service
+int Mode = 0;// 0=RandMove // 1=RCMove  //2=human //3=Service // 4= Debug
 int moving = 0;
 
 //#### Status Signal fom 16  ACTUAL INACTIVE

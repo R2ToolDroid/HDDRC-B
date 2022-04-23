@@ -3,6 +3,24 @@
 //// Commandos ///////
 void ProzessComando() {
 
+      if(data == "l"){      
+     // gap = 300;
+        DomeMot(LEFT,220);
+      }
+
+      if(data == "r"){      
+     // gap = 300;
+     DomeMot(RIGHT,220);
+     
+      }
+
+      if(data == "s"){      
+     // gap = 300;
+     DomeMot(STOP,0);
+     
+      }
+      
+
        
       
       Serial.print("Data =");
@@ -28,6 +46,12 @@ void ProzessComando() {
       //LMotor(B_DOWN);
       tPos = B_DOWN;
     }
+
+    if(data == "DRIVE"){
+      //LMotor(B_DOWN);
+      tPos = C_DRIVEPOS;
+    }
+    
     if(data == "C"){
       //LMotor(M_STOP);
       tPos = B_CENT;
@@ -128,20 +152,31 @@ void ProzessComando() {
       //center("L");
       //delay(1000);
       Mode = 1;
+      ArmSrv.detach();
       }
     if (data == "mode0"){
       Serial.println(F("Mode 0 Random"));
       //delay(1000);
       Mode = 0;
+      ArmSrv.detach();
       }
     if (data == "mode3"){
       Serial.println(F("Mode 3 Service"));
       //delay(1000);
       Mode = 3;
+      ArmSrv.attach(STATUS_PIN);
       }
+    if (data == "mode4"){
+      Serial.println(F("Mode 4 Service"));
+      //delay(1000);
+      Mode = 4;
+      }
+
+      
     if (data == "mode2"){
       Serial.println(F("Mode 2 Human"));
       //delay(1000);
+      ArmSrv.detach();
       Mode = 2;
       }  
      

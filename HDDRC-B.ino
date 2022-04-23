@@ -1,20 +1,47 @@
 ///Automatische Domebewegung Steuerung
 ///Doc Snyder Tool Droid DomeController
+<<<<<<< Updated upstream
 ///für Arduino pro mini
+=======
+///für Arduino pro mini  actual
+>>>>>>> Stashed changes
+/*
+PIN MAPPING
 
+  PIN 2  SDA
+  PIN 3  SCL
+  PIN 4  --  LEG B   Dome Mot PWM  Move to 9
+  PIN 5   TXsmc  DOME A
+  PIN 6   RXsmc  DOME B 
+  PIN 7  --- LEG A  frei  vorher LegMOt
+  PIN 8  SENSOR_CENTER
+  PIN 9  LEG_POTI                 Move to 4
+  PIN 10 PWM_OUT HOLO
+  PIN 14 Rx  Main
+  PIN 15 Tx  Main
+  PIN 16 STATUS_PIN
+  PIN 18 ledPin1
+  PIN 19 ledPin2
+  PIN 20 ledPinC
+  PIN 21 SENSOR_RC_IN
+
+ */
 #include <SoftwareSerial.h>        // Durch diesen Include können wir die Funktionen 
 #include <Servo.h>
 
+#include "SoftPWM.h"
+
 #include <Wire.h>  
+#include "vars.h"
 #include "Grove_Human_Presence_Sensor.h" // der SoftwareSerial Bibliothek nutzen.
 SoftwareSerial MainInput(14, 15); // Pin D14 ist RX, Pin D15 ist TX.
-                                   // Die Funktion softSerial() kann nun wie Serial() genutzt werden.     
+  
 Servo HoloV; ///PWM_OUT PIN 10
-Servo LegMot; //PWM OUT PIN 7
 Servo ArmSrv; //PWM OUT PIN 16
-Servo DomeMot; // PWM OUT PIN 4
 
-#include "vars.h"
+//Servo LEG_A; // PWM
+//Servo LEG_B; // PWM
+
 
 AK9753 movementSensor;
 
@@ -28,10 +55,13 @@ float temp = 24;
 
 void setup(){
 
+  SoftPWMBegin();
+
   HoloV.attach(PWM_OUT);  // PIN 10
-  LegMot.attach(BMOT_L);  // PIN 7
-  DomeMot.attach(DMOT_L); // PIN 4
   ArmSrv.attach(STATUS_PIN);
+  //LEG_A.attach(LMOT_A);
+  //LEG_B.attach(LMOT_B);
+  
   ArmSrv.write(ARM_IN);
    
   Serial.begin(115200);
@@ -40,11 +70,11 @@ void setup(){
   pinMode(ledPin1, OUTPUT);
   pinMode(ledPin2, OUTPUT);
   pinMode(ledPinC, OUTPUT);
+  pinMode(DMOT_A, OUTPUT);
+  pinMode(DMOT_B, OUTPUT); 
+  pinMode(LMOT_A, OUTPUT);
+  pinMode(LMOT_B, OUTPUT); 
 
-  //pinMode(DMOT_L, OUTPUT);
-  //pinMode(DMOT_R, OUTPUT); 
-
-  //pinMode(STATUS_PIN, INPUT_PULLUP); 
   pinMode(SENSOR_CENTER,  INPUT_PULLUP);
  
   //digitalWrite(DMOT_L, 0);  
@@ -59,11 +89,7 @@ void setup(){
   //delay(2000);
   Serial.println("DomeController_ Doc Tooldroide");
   Serial.println("...ready for Command_");
-  
-  //startseq();
-
-//   SetupEvent::ready();
-   Wire.begin();
+    Wire.begin();
 
    //Turn on sensor
     if (movementSensor.initialize() == false) {
@@ -72,23 +98,22 @@ void setup(){
         delay(3000);
     }
 
-  //DomeMot.write(90);   //PIN 4
+  
   HoloV.write(90);
-  //LegMot.write(90);    //PIN 7
-  DomeMot.write(90);
-  //ArmSrv.write(ARM_IN);
-  //ServoTouch(false);
-  //center("L");
+
+  SoftPWMSet(LMOT_A, 0);
+  SoftPWMSet(LMOT_B, 0);
+  SoftPWMSet(DMOT_A, 0);
+  SoftPWMSet(DMOT_B, 0);
+  
+ 
 }
 
 
 void loop() {
 
     Comand();  
-    //CeckSens();
 
-     
-    
   if (Mode == 0){
      autoDome();
      //durchlauf = durchlauf+1;
@@ -115,6 +140,25 @@ void loop() {
   }
   
   //BodyRot(tPos);
+  
+  if (Mode == 4  ){
+    //BodyRot(tPos);
+    /*
+    for (int i=0; i<=255; i++) {
+        //analogWrite(LMOT_A, i);
+
+        SoftPWMSet(4, i);  //LMOT_A
+        //analogWrite(LMOT_B, i);
+        delay (100);
+        Serial.println(i);
+    }
+    */
+    
+  }
+  
+
+
+
   
   if (durchlauf == 10 ) {
       center("L");
