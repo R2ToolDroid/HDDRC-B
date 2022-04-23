@@ -31,6 +31,11 @@ void DomeMot( int Direction, int speed){
           /// LegMot(RIGHT,255);
 void LegMot( int Direction, int speed){
 
+  if (debug) {   
+      Serial.print(" DIR ");
+      Serial.println(Direction);
+      }
+
     if (Direction == 1) {
       //analogWrite(LMOT_A, 0);
       //analogWrite(LMOT_B, speed);

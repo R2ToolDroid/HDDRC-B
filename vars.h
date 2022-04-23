@@ -5,7 +5,7 @@ String VERSION = "10-04-22-HDDRC-B";
 String output;
 
 //#define DEBUG
-byte debug = false;
+byte debug = true;
 byte Ping = false;
 byte dir = false;  //false = left  true == right 
 int Sdiff = 0;
@@ -60,11 +60,11 @@ byte domeAutoSpeed = 220;     // Speed used when dome automation is active - Val
 int Ltemp_R = 180;          //Leg Speed rechts
 int Ltemp_L = 180;         //Leg Motor Speed links
 
-#define CenterSpeed 240       // Speed for getting Center
-#define NormSpeed 240         // Speed for usual Point Rotation
+int CenterSpeed = 240;       // Speed for getting Center
+int NormSpeed = 240;         // Speed for usual Point Rotation
 
-#define RC_SPEED_MIN 180    
-#define RC_SPEED_MAX 255
+int RC_SPEED_MIN = 180;    
+int RC_SPEED_MAX = 255;
 
 
 
