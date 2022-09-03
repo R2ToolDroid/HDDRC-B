@@ -56,16 +56,16 @@ int gap = 200;  /// 200 LOW 300 HIGH Lücke wo nichts verfolgt wird
 
 /// Speed Definitions usualy between 0 and 255 max
 
-int Htempo = 180; //Human Tracking Tempo
-byte domeAutoSpeed = 220;     // Speed used when dome automation is active - Valid Values: 50 - 100
+int Htempo = 210; //180Human Tracking Tempo
+byte domeAutoSpeed = 250;     //220 Speed used when dome automation is active - Valid Values: 50 - 100
 
 int Ltemp_R = 100;          //Leg Speed rechts
 int Ltemp_L = 100;         //Leg Motor Speed links
 
-int CenterSpeed = 240;       // Speed for getting Center
-int NormSpeed = 240;         // Speed for usual Point Rotation
+int CenterSpeed = 255;       // Speed for getting Center
+int NormSpeed = 255;         // Speed for usual Point Rotation
 
-int RC_SPEED_MIN = 150;    
+int RC_SPEED_MIN = 170;    
 int RC_SPEED_MAX = 255;
 
 
