@@ -52,17 +52,17 @@ MOTOR SPEED AND MOVE DEFINITONS
 
 #define STOP 3
 
-int gap = 200;  /// 200 LOW 300 HIGH Lücke wo nichts verfolgt wird
+int gap = 300;  /// 200 LOW 300 HIGH Lücke wo nichts verfolgt wird
 
 /// Speed Definitions usualy between 0 and 255 max
 
-int Htempo = 210; //180Human Tracking Tempo
-byte domeAutoSpeed = 250;     //220 Speed used when dome automation is active - Valid Values: 50 - 100
+int Htempo = 160; //180Human Tracking Tempo
+byte domeAutoSpeed = 230;     //220 Speed used when dome automation is active - Valid Values: 50 - 100
 
 int Ltemp_R = 100;          //Leg Speed rechts
 int Ltemp_L = 100;         //Leg Motor Speed links
 
-int CenterSpeed = 255;       // Speed for getting Center
+int CenterSpeed = 240;       // Speed for getting Center
 int NormSpeed = 255;         // Speed for usual Point Rotation
 
 int RC_SPEED_MIN = 170;    
