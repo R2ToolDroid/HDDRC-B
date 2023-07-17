@@ -45,6 +45,7 @@ void ProzessComando() {
     if(data == "D"){
       //LMotor(B_DOWN);
       tPos = B_DOWN;
+      IsDown = true;
     }
 
     if(data == "DRIVE"){
@@ -55,6 +56,17 @@ void ProzessComando() {
     if(data == "C"){
       //LMotor(M_STOP);
       tPos = B_CENT;
+    }
+
+    if(data == "shake"){
+
+      if (IsDown == true) {
+       tPos = B_CENT;
+       IsDown = false;
+      } else {
+       tPos = B_DOWN;
+      IsDown = true;
+      }
     }
 
 
@@ -193,15 +205,18 @@ void ProzessComando() {
     
     if (data == "p4"){Serial.println(F("Rotation zu Position P4")); rotateR(Rpos*110);}
     
-    if (data == "tool1"){Serial.println(F("Rotation zu Position tool1"));  rotateR(Rpos*110); }
+    if (data == "tool1"){Serial.println(F("Rotation zu Position tool1"));  rotateR(Rpos*95); }
     
-    if (data == "tool2"){Serial.println(F("Rotation zu Position tool2")); rotateR(Rpos*140); }
+    if (data == "tool2"){Serial.println(F("Rotation zu Position tool2")); rotateR(Rpos*100); }
     
-    if (data == "tool3"){Serial.println(F("Rotation zu Position tool3")); rotateR(4000); } 
+    if (data == "tool3"){Serial.println(F("Rotation zu Position tool3")); rotateR(Rpos*180); } 
      
     if (data == "nono"){Serial.println(F("Rotation nono"));
     rotateR(Rpos*50);
     rotateL(Rpos*50);
+    rotateR(Rpos*50);
+    rotateL(Rpos*50);
+    
     }
     
     if (data == "yea"){Serial.println("Rotation yea");}

@@ -126,7 +126,7 @@ void loop() {
 
   if (Mode == 2  ){
      human(); 
-    
+    BodyRot(tPos);
   }
 
   if (Mode == 3  ){

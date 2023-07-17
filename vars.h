@@ -77,7 +77,7 @@ int RC_SPEED_MAX = 255;
 
 
 int faktor = 100;
-unsigned long Rpos = 13;  //Zeit von Center to Zielposition in Millisec
+unsigned long Rpos = 6;  //Zeit von Center to Zielposition in Millisec
 int durchlauf = 0;
 int sensorValue = 1500; ///Umschalt Pulse
 
@@ -101,6 +101,8 @@ int vpos1;
 int vpos2;
 int Vdiff;
 byte Hdiff;
+
+byte IsDown = false;
 
 int pos = 0;    // variable to store the servo position
 int tempPos ;
