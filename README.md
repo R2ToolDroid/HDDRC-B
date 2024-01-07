@@ -6,7 +6,7 @@ Dome Control With Body Ankle for ToolDroid
 Based on https://github.com/R2ToolDroid/Dome-Controller_Human-01
 
 ## MAG TAG PINOUT
-Right Dome Power 5V
+Right Dome Power 5V   PWR PIN #2
 
 * 1 RX Master      white
 * 2 RC in MD        gray
