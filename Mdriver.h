@@ -244,7 +244,7 @@ int rcMove() {
                  Serial.print(F("  tempoR "));Serial.println(tempoR);
             } 
     
-    } else if (sensorValue < 930) {
+    } else if (sensorValue < 900) {
           
     
       
