@@ -157,8 +157,10 @@ int center(String dir) {
    }
     
      DomeMot(STOP,0);
+
+        //// Change to Magnet Sensor State  0  to 1 
       
-      while ( centerState == 0){
+      while ( centerState == 1){          
 
                  centerState = digitalRead(SENSOR_CENTER);  
                 
