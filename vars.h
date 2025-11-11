@@ -56,7 +56,7 @@ int gap = 300;  /// 200 LOW 300 HIGH Lücke wo nichts verfolgt wird
 
 /// Speed Definitions usualy between 0 and 255 max
 
-int Htempo = 160; //180Human Tracking Tempo
+int Htempo = 100; //180Human Tracking Tempo
 byte domeAutoSpeed = 230;     //220 Speed used when dome automation is active - Valid Values: 50 - 100
 
 int Ltemp_R = 100;          //Leg Speed rechts
